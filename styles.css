@@ -8,7 +8,7 @@
     border-radius: 10px;
     text-align: center;
     color: white;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', Cursive;
     box-shadow: 0 0 10px #6200ff, 0 0 20px #6200ff, 0 0 30px #6200ff, 0 0 40px #6200ff;
     animation: overlay-glow 2s infinite ease-in-out;
 }
