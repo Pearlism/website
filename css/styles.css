@@ -838,7 +838,7 @@
   
   .progress-fill {
     height: 100%;
-    background-color:#5f21c4;
+    background-color:#5f21c400;
     border-radius: 5px;
   }
   
@@ -879,7 +879,7 @@ html, body {
 main.tagline {
   position: relative;
   z-index: 1; /* Ensure it’s on top of particles-js */
-  background-color: #f700ff00;
+  background-color: #00000000;
   padding: 20px;
   margin-top: 0; /* Reset margin at the top */
 }
