@@ -55,3 +55,20 @@
         box-shadow: 0 0 10px #4400ff, 0 0 20px #4400ff, 0 0 30px #4400ff, 0 0 40px #4400ff;
     }
 }
+.glow-button {
+    color: white;
+    border: none;
+    background-color: #6200ff;
+    box-shadow: 0 0 5px #6200ff, 0 0 15px #6200ff, 0 0 25px #6200ff, 0 0 35px #6200ff;
+    animation: glow-animation 2s infinite ease-in-out;
+}
+
+@keyframes glow-animation {
+    0%, 100% {
+        box-shadow: 0 0 5px #6200ff, 0 0 15px #6200ff, 0 0 25px #6200ff, 0 0 35px #6200ff;
+    }
+
+    50% {
+        box-shadow: 0 0 10px #4400ff, 0 0 20px #4400ff, 0 0 30px #4400ff, 0 0 40px #4400ff;
+    }
+}
