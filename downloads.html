@@ -11,8 +11,6 @@
     <script>
         ScrollReveal({ reset: true });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/js/boxicons.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script> <!-- Particles.js Script -->
     <title>Landen419</title>
     <style>
         html, body {
@@ -31,44 +29,57 @@
             background-color: #000;
         }
 
-        /* Ensure the content takes up the full height as needed */
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        main {
-            flex: 1;
+        main.tagline {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            margin: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .content-text h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .content-text p {
+            font-size: 1rem;
+            color: #555;
+        }
+        
+        .purple {
+            color: #6a0dad;
         }
     </style>
 </head>
 <body>
+
     <div id="particles-js"></div> <!-- Particles Background -->
 
-    <header>
-        <a class="logo" href="#">Landen419</a>
-        <nav>
-            <ul>
-                <li><a class="lis" href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#aboutme">About me</a></li>
-            </ul>
-        </nav>
-        <a class="button" href="#contactme">Contact me</a>
-        <i class="bx iconn bx-menu-alt-right"></i>
-        <div class="dropdown" id="dropdown">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#aboutme">About me</a></li>
-                <a class="button dropdownbtn" href="#contactme">Contact me</a>
-            </ul>
-        </div>
-    </header>
-    
     <main class="tagline" id="home">
         <div class="content">
             <div class="content-image">
@@ -80,6 +91,115 @@
             </div>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+</body>
+</html>
     <h1 id="services" class="center white abitdown tagline">Services</h1>
     <section class="services-section tagline">
         <div class="service-box">
