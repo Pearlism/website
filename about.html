@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,47 +47,47 @@
         }
 
         header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(145deg, #1a1825, #161520);
-    border-radius: 15px;
-    box-shadow: 8px 8px 16px var(--shadow-dark), 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(145deg, #1a1825, #161520);
+            border-radius: 15px;
+            box-shadow: 8px 8px 16px var(--shadow-dark),
                 -8px -8px 16px var(--shadow-light);
-    margin: 2rem 0;
-}
+            margin: 2rem 0;
+        }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: linear-gradient(45deg, var(--accent), #ff00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-}
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent), #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
 
-nav {
-    display: flex;
-    gap: 1rem;
-}
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
 
-nav a {
-    color: var(--text);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 5px var(--shadow-dark), 
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 5px var(--shadow-dark),
                 -2px -2px 5px var(--shadow-light);
-}
+        }
 
-nav a:hover {
-    color: var(--accent);
-    box-shadow: inset 2px 2px 5px var(--shadow-dark), 
+        nav a:hover {
+            color: var(--accent);
+            box-shadow: inset 2px 2px 5px var(--shadow-dark),
                 inset -2px -2px 5px var(--shadow-light);
-}
+        }
 
         .hero {
             text-align: center;
@@ -181,8 +182,15 @@ nav a:hover {
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .fade-in {
@@ -249,11 +257,17 @@ nav a:hover {
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="loader-wrapper">
         <div class="loader"></div>
@@ -287,9 +301,10 @@ nav a:hover {
             <div class="glass-card">
                 <h2>Partners</h2>
                 <p>
-                <a href="https://Discord.gg/qlm">QLM</a></p>
-                <a href="https://Discord.gg/skreecho">Skreech</a></p>
-                <a href="https://Discord.gg/suffix">Suffix</a></p>
+                    <a href="https://Discord.gg/qlm">QLM</a>
+                </p>
+                <a href="https://Discord.gg/skreecho">Skreech</a>
+                <a href="https://Discord.gg/suffix">Suffix</a>
             </div>
         </section>
 
@@ -328,30 +343,80 @@ nav a:hover {
                         entry.target.style.transform = 'translateY(0)';
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
 
             fadeElements.forEach(el => observer.observe(el));
         });
 
         particlesJS('particles-js', {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#8a2be2" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: "#8a2be2", opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#8a2be2"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#8a2be2",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
             },
             interactivity: {
                 detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
             },
             retina_detect: true
         });
 
-        window.addEventListener('load', function(){
+        window.addEventListener('load', function() {
             const loader = document.querySelector('.loader-wrapper');
             loader.className += ' hidden';
             setTimeout(() => {
@@ -360,4 +425,5 @@ nav a:hover {
         });
     </script>
 </body>
+
 </html>
