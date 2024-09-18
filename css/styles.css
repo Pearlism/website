@@ -868,3 +868,18 @@
     z-index: -1;
     background-color: #000;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll if needed */
+}
+
+main.tagline {
+  position: relative;
+  z-index: 1; /* Ensure it’s on top of particles-js */
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 0; /* Reset margin at the top */
+}
