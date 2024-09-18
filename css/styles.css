@@ -859,3 +859,12 @@
     margin-bottom: 3rem;
   }
   
+  #particles-js {
+    position: fixed; /* Fixes the element relative to the viewport */
+    width: 100%;
+    min-height: 100vh; /* Minimum height of the full viewport */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #000;
+}
