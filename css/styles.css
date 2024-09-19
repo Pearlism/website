@@ -879,7 +879,7 @@ html, body {
 main.tagline {
   position: relative;
   z-index: 1; /* Ensure it’s on top of particles-js */
-  background-color: #000000;
+  background-color: #00000000;
   padding: 20px;
   margin-top: 0; /* Reset margin at the top */
 }
