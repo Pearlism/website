@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="pearl.ico" />
-  </head>
+</head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,24 +46,6 @@
             }
         }
 
-        /* TikTok overlay */
-        #tiktok-overlay {
-            position: absolute;
-            top: 5%;
-            right: 5%;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            color: white;
-            font-family: 'Oswald', Cursive;
-        }
-
-        .stat {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
         /* Eye icon and viewer count styling */
         #viewer-count {
             font-size: 18px;
@@ -76,9 +58,9 @@
             color: #fff;
         }
 
-            #viewer-count i {
-                color: rgb(162, 0, 255);
-            }
+        #viewer-count i {
+            color: rgb(162, 0, 255);
+        }
 
         /* Switch styling */
         .switch {
@@ -90,11 +72,11 @@
             top: 3%;
         }
 
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
         .slider {
             position: absolute;
@@ -110,25 +92,25 @@
             animation: button-glow 2s infinite ease-in-out;
         }
 
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                transition: .4s;
-                border-radius: 50%;
-            }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
 
         input:checked + .slider {
             background-color: #4400ff;
         }
 
-            input:checked + .slider:before {
-                transform: translateX(26px);
-            }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
 
         /* Glowing effect for the slider */
         @keyframes button-glow {
@@ -163,14 +145,14 @@
             gap: 20px;
         }
 
-            .icons a {
-                color: rgb(48, 0, 161);
-                transition: color 0.3s;
-            }
+        .icons a {
+            color: rgb(48, 0, 161);
+            transition: color 0.3s;
+        }
 
-                .icons a:hover {
-                    color: #740083;
-                }
+        .icons a:hover {
+            color: #740083;
+        }
     </style>
 </head>
 <body>
@@ -188,9 +170,6 @@
                     </span>
                     <span id="block">
                         <a href="https://github.com/pearlism" target="_blank"><i class="fab fa-github fa-2x"></i></a>
-                    </span>
-                    <span id="block">
-                        <a href="https://www.tiktok.com/@landen.419" target="_blank"><i class="fab fa-tiktok fa-2x"></i></a>
                     </span>
                     <span id="block">
                         <a href="https://www.instagram.com/landen.419/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
@@ -214,18 +193,6 @@
                     <span class="slider round"></span>
                     <audio id="myaudio"> <source src="bhonest.mp3" type="audio/mp3"> </audio>
                 </label>
-            </div>
-        </div>
-
-        <!-- TikTok Stats Overlay -->
-        <div id="tiktok-overlay">
-            <h3>TikTok</h3>
-            <div class="stat">Followers: <span id="followers-count">28.7K</span></div>
-            <div class="stat">Likes: <span id="likes-count">1M</span></div>
-            <div class="stat">
-                <a href="https://www.tiktok.com/@landen.419" target="_blank">
-                    <button class="tiktok-btn">@landen.419</button>
-                </a>
             </div>
         </div>
 
