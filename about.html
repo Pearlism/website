@@ -129,8 +129,8 @@
         </div>
 
         <div id="buttonsContainer" class="buttons">
-            <a href="#" class="button" id="downloadButton">Download</a>
-            <a href="#" class="button" id="previewButton">Preview</a>
+            <a href="#" class="button" id="downloadButton" target="_blank">Download</a>
+            <a href="#" class="button" id="previewButton" target="_blank">Preview</a>
         </div>
     </div>
 
@@ -145,11 +145,11 @@
 
                 // Change the button actions based on the selected tool
                 if (selectedTool === 'triggerbot') {
-                    document.getElementById('downloadButton').href = 'https://www.mediafire.com/file/zbmgt4sos1qq29f/419_TriggerBot.rar/filehttps://download1527.mediafire.com/72bd5vjnhg1gRuan__r_Ljr3KY1STJM4v1sOYTMqwg9yk1PpRgoZsQDHFKe1NFIw7N-H1noHqqMmmF4KS4u6WNo4rE1vrv-f6k7O4vLpPw2apy4W2r_v6Ay27EQrk56jCFJ8W6lpiS3y740Z8CBKiimxTQ6YmBCGQa1f9bz2nmaU9Nw/zbmgt4sos1qq29f/419+TriggerBot.rarhttps://download1527.mediafire.com/72bd5vjnhg1gRuan__r_Ljr3KY1STJM4v1sOYTMqwg9yk1PpRgoZsQDHFKe1NFIw7N-H1noHqqMmmF4KS4u6WNo4rE1vrv-f6k7O4vLpPw2apy4W2r_v6Ay27EQrk56jCFJ8W6lpiS3y740Z8CBKiimxTQ6YmBCGQa1f9bz2nmaU9Nw/zbmgt4sos1qq29f/419+TriggerBot.rar'; // Link to Triggerbot download
-                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI'; // Link to Triggerbot preview
+                    document.getElementById('downloadButton').href = 'https://www.mediafire.com/file/zbmgt4sos1qq29f/419_TriggerBot.rar/file';
+                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI';
                 } else if (selectedTool === 'unlockall') {
-                    document.getElementById('downloadButton').href = 'https://gofile.io/d/VQJbHB'; // Link to Unlock All download
-                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI'; // Link to Unlock All preview
+                    document.getElementById('downloadButton').href = 'https://gofile.io/d/VQJbHB';
+                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI';
                 }
             } else {
                 buttonsContainer.style.display = 'none';
