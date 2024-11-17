@@ -46,7 +46,6 @@
             }
         }
 
-        /* Eye icon and viewer count styling */
         #viewer-count {
             font-size: 18px;
             position: absolute;
@@ -62,7 +61,6 @@
             color: rgb(162, 0, 255);
         }
 
-        /* Switch styling */
         .switch {
             position: absolute;
             display: inline-block;
@@ -112,7 +110,6 @@
             transform: translateX(26px);
         }
 
-        /* Glowing effect for the slider */
         @keyframes button-glow {
             0%, 100% {
                 box-shadow: 0 0 5px #6200ff, 0 0 15px #6200ff, 0 0 25px #6200ff, 0 0 35px #6200ff;
@@ -123,7 +120,6 @@
             }
         }
 
-        /* Glowing text effect */
         #button-text {
             animation: text-glow 2s infinite ease-in-out;
         }
@@ -138,7 +134,6 @@
             }
         }
 
-        /* Icons styling */
         .icons {
             display: flex;
             justify-content: center;
@@ -153,6 +148,23 @@
         .icons a:hover {
             color: #740083;
         }
+
+        /* Additional button styles */
+        .glow-button {
+            color: #fff;
+            background-color: #6200ff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            box-shadow: 0 0 10px #6200ff;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .glow-button:hover {
+            background-color: #4400ff;
+            box-shadow: 0 0 20px #4400ff;
+        }
     </style>
 </head>
 <body>
@@ -166,7 +178,7 @@
                 <h1>Landen.419</h1>
                 <span class="icons">
                     <span id="block">
-                        <a href="https://discord.gg/invite/7t7bbXW76J" target="_blank"><i class="fab fa-discord fa-2x"></i></a>
+                        <a href="https://discord.gg/PEjQMcuVBF" target="_blank"><i class="fab fa-discord fa-2x"></i></a>
                     </span>
                     <span id="block">
                         <a href="https://github.com/pearlism" target="_blank"><i class="fab fa-github fa-2x"></i></a>
@@ -175,9 +187,15 @@
                         <a href="https://www.instagram.com/landen.419/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
                     </span>
                 </span>
-                <!-- New Downloads button -->
+                <!-- New Buttons -->
                 <a href="about.html">
                     <button class="btn btn-primary mt-4 glow-button">Valorant Tools</button>
+                </a>
+                <a href="tool2.html">
+                    <button class="btn btn-primary mt-4 glow-button">Windows Tools</button>
+                </a>
+                <a href="downloads.html">
+                    <button class="btn btn-primary mt-4 glow-button">About</button>
                 </a>
                 <!-- Viewer count section -->
                 <div id="viewer-count">
@@ -204,7 +222,7 @@
                 $('.round').click(function () {
                     if (more % 2 === 0) {
                         $(myAudio)[0].play();
-                        $('#button-text').text(' ');
+                        $('#button-text').text(' '); 
                     } else {
                         $(myAudio)[0].pause();
                         $('#button-text').text('');
@@ -213,6 +231,5 @@
                 });
             });
         </script>
-
 </body>
 </html>
