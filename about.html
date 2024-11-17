@@ -1,433 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="shortcut icon" type="image/x-icon" href="pearl.ico" />
-      </head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Landen.419 </title>
+    <title>419 Valorant Tools</title>
     <style>
-        :root {
-            --main-bg: linear-gradient(135deg, #16141f, #0c0a14);
-            --card-bg: linear-gradient(145deg, #1e1e2e, #24243c);
-            --accent: #8a2be2;
-            --text: #ffffff;
-            --shadow-light: rgba(255, 255, 255, 0.05);
-            --shadow-dark: rgba(0, 0, 0, 0.2);
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: var(--main-bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: linear-gradient(145deg, #1a1825, #161520);
-            border-radius: 15px;
-            box-shadow: 8px 8px 16px var(--shadow-dark),
-                -8px -8px 16px var(--shadow-light);
-            margin: 2rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-        }
-
-        nav {
-            display: flex;
-            gap: 1rem;
-        }
-
-        nav a {
-            color: var(--text);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 2px 2px 5px var(--shadow-dark),
-                -2px -2px 5px var(--shadow-light);
-        }
-
-        nav a:hover {
-            color: var(--accent);
-            box-shadow: inset 2px 2px 5px var(--shadow-dark),
-                inset -2px -2px 5px var(--shadow-light);
-        }
-
-        .hero {
-            text-align: center;
-            padding: 6rem 0;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            color: var(--text);
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin: 0 0.5rem;
-            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
-
-        .btn:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .section {
-            padding: 1rem 0;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .glass-card {
-            background: rgba(138, 43, 226, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-            opacity: 0;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #ff00ff;
-        }
-
-        footer {
-            background: var(--card-bg);
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            margin: 1rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-        }
-
-        .social-icons a {
-            margin: 0 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--main-bg);
+            overflow: hidden; /* Prevent scrolling */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
         }
 
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--accent);
-            border-top: 5px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        /* Full-screen background video */
+        #backgroundVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the whole screen */
+            z-index: -1; /* Keep the video behind the content */
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            z-index: 1; /* Make sure the text is on top */
+        }
+
+        h1 {
+            font-size: 3em;
+            color: magenta;
+            text-shadow: 0 0 20px magenta, 0 0 30px magenta, 0 0 40px magenta;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+            .dropdown select {
+                padding: 15px;
+                font-size: 1.2em;
+                background-color: black;
+                color: white;
+                border: 2px solid magenta;
+                border-radius: 5px;
+                outline: none;
+                cursor: pointer;
+                width: 250px;
+                text-align: center;
+                box-shadow: 0 0 5px magenta;
+                transition: width 0.3s ease;
             }
 
-            100% {
-                transform: rotate(360deg);
+                .dropdown select:focus {
+                    border-color: #ff3399;
+                    box-shadow: 0 0 10px magenta;
+                    width: 300px; /* Animates the dropdown to expand when focused */
+                }
+
+        .buttons {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.2em;
+            border: 2px solid magenta;
+            border-radius: 10px;
+            background-color: black;
+            color: magenta;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .button:hover {
+                background-color: magenta;
+                color: black;
+                box-shadow: 0 0 10px magenta;
             }
+
+            .button:active {
+                transform: scale(0.95);
+            }
+
+        /* Style for the audio player (hidden by default) */
+        #audioPlayer {
+            display: none;
         }
     </style>
 </head>
-
 <body>
-    <div class="loader-wrapper">
-        <div class="loader"></div>
-    </div>
 
-    <div id="particles-js"></div>
+    <!-- Background Video -->
+    <video id="backgroundVideo" autoplay loop muted>
+        <source src="vidd.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Background Audio Player -->
+    <audio id="audioPlayer" loop>
+        <source src="frank.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="container">
-        <header>
-            <div class="logo">Landen.419</div>
-            <nav>
-                <a href="https://github.com/pearlism">GitHub</a>
-                <a href="https://discord.gg/7t7bbXW76J">Discord</a>
-            </nav>
-        </header>
+        <h1>419 Valorant Tools</h1>
+        <div class="dropdown">
+            <select id="toolsDropdown" onchange="showButtons()">
+                <option value="" disabled selected>Select a tool</option>
+                <option value="triggerbot">Valorant Triggerbot</option>
+                <option value="unlockall">Valorant Unlock All</option>
+            </select>
+        </div>
 
-        <section class="hero fade-in" id="home">
-            <h1>Landen.419</h1>
-            <p class="subtitle">Full Stack Web and Desktop Developer. Im currently learning Kernel (Windows Drivers).
-</p>
-            <button class="btn" onclick="location.href='https://discord.gg/7t7bbXW76J';">Discord</button>
-            <button class="btn" onclick="location.href='https://github.com/pearlism';">GitHub</button>
-        </section>
-
-        <section class="section fade-in" id="about">
-            <div class="glass-card">
-                <h2>About 419</h2>
-                <p>419 is my area code that i add to everything, idk why. but ive been doing dev work for about a couple years now. i started learning when i was 11 and than just had fun with different things and started to learn more!</p>
-            </div>
-        </section>
-
-        <section class="section fade-in" id="products">
-            <div class="glass-card">
-                <h2>Partners</h2>
-                <p>
-                    <a href="https://Discord.gg/qlm">QLM</a>
-                </p>
-                <a href="https://Discord.gg/skreecho">Skreech</a>
-            </p>
-                <a href="https://Discord.gg/suffix">Suffix</a>
-            </div>
-        </section>
-
-        <section class="section fade-in" id="contact">
-            <div class="glass-card">
-                <h2>Get in Touch</h2>
-                <p>Join my discord if you ever wanna talk to me or dm me! <a href="https://discord.gg/7t7bbXW76J">discord</a></p>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="social-icons">
-                        <a href="https://discord.gg/7t7bbXW76J" target="_blank">Discord</a>
-                        <a href="https://github.com/pearlism" target="_blank">GitHub</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Landen.419</h3>
-                    <p>&copy; 2024 419. Made By Landen.</p>
-                </div>
-            </div>
-        </footer>
+        <div id="buttonsContainer" class="buttons">
+            <a href="#" class="button" id="downloadButton">Download</a>
+            <a href="#" class="button" id="previewButton">Preview</a>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
+        // Function to show buttons when a tool is selected
+        function showButtons() {
+            var selectedTool = document.getElementById("toolsDropdown").value;
+            var buttonsContainer = document.getElementById("buttonsContainer");
+
+            if (selectedTool) {
+                buttonsContainer.style.display = 'block';
+
+                // Change the button actions based on the selected tool
+                if (selectedTool === 'triggerbot') {
+                    document.getElementById('downloadButton').href = 'https://www.mediafire.com/file/zbmgt4sos1qq29f/419_TriggerBot.rar/filehttps://download1527.mediafire.com/72bd5vjnhg1gRuan__r_Ljr3KY1STJM4v1sOYTMqwg9yk1PpRgoZsQDHFKe1NFIw7N-H1noHqqMmmF4KS4u6WNo4rE1vrv-f6k7O4vLpPw2apy4W2r_v6Ay27EQrk56jCFJ8W6lpiS3y740Z8CBKiimxTQ6YmBCGQa1f9bz2nmaU9Nw/zbmgt4sos1qq29f/419+TriggerBot.rarhttps://download1527.mediafire.com/72bd5vjnhg1gRuan__r_Ljr3KY1STJM4v1sOYTMqwg9yk1PpRgoZsQDHFKe1NFIw7N-H1noHqqMmmF4KS4u6WNo4rE1vrv-f6k7O4vLpPw2apy4W2r_v6Ay27EQrk56jCFJ8W6lpiS3y740Z8CBKiimxTQ6YmBCGQa1f9bz2nmaU9Nw/zbmgt4sos1qq29f/419+TriggerBot.rar'; // Link to Triggerbot download
+                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI'; // Link to Triggerbot preview
+                } else if (selectedTool === 'unlockall') {
+                    document.getElementById('downloadButton').href = 'https://gofile.io/d/VQJbHB'; // Link to Unlock All download
+                    document.getElementById('previewButton').href = 'https://www.youtube.com/watch?v=jREo7pmD8XI'; // Link to Unlock All preview
+                }
+            } else {
+                buttonsContainer.style.display = 'none';
+            }
+        }
+
+        // Play audio only after user interacts with the page
+        window.onload = function () {
+            var audio = document.getElementById('audioPlayer');
+            var hasInteracted = false;
+
+            // Play audio when the user clicks anywhere on the page
+            document.body.addEventListener('click', function () {
+                if (!hasInteracted) {
+                    try {
+                        audio.play();
+                        hasInteracted = true;
+                        console.log("Audio is playing");
+                    } catch (error) {
+                        console.error("Audio failed to play: " + error);
                     }
-                });
-            }, {
-                threshold: 0.1
+                }
             });
 
-            fadeElements.forEach(el => observer.observe(el));
-        });
-
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#8a2be2"
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false
-                },
-                size: {
-                    value: 3,
-                    random: true
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#8a2be2",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: false,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "repulse"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    repulse: {
-                        distance: 100,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
+            // Optionally, you can also add keydown event to trigger the audio play
+            document.body.addEventListener('keydown', function () {
+                if (!hasInteracted) {
+                    try {
+                        audio.play();
+                        hasInteracted = true;
+                        console.log("Audio is playing");
+                    } catch (error) {
+                        console.error("Audio failed to play: " + error);
                     }
                 }
-            },
-            retina_detect: true
-        });
-
-        window.addEventListener('load', function() {
-            const loader = document.querySelector('.loader-wrapper');
-            loader.className += ' hidden';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 1000);
-        });
+            });
+        };
     </script>
 </body>
-
 </html>
