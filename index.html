@@ -1,242 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="pearl.ico" />
-</head>
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>@landen.419</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/6dbcb3829c.js" crossorigin="anonymous"></script>
+    <meta name="description" content="I'm Landen Learning Windows Kernel">
+    <link rel="stylesheet" href="css/styles.css" async>
+    <link rel="shortcut icon" href="images/3843527-200.png" type="image/x-icon" async>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" async>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        ScrollReveal({ reset: true });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/js/boxicons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script> <!-- Particles.js Script -->
+    <title>Landen419</title>
     <style>
-        body {
-            background-color: black;
-            cursor: url('cur.cur'), auto;
-        }
-
-        #hero video {
-            height: 100vh;
-            width: 100%;
-            background-position: absolute;
-            z-index: 10;
-            object-fit: cover;
-        }
-
-        #hero .content {
-            background: rgba(0,0,0,0.7);
+        html, body {
             height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #particles-js {
+            position: fixed;
             width: 100%;
-            z-index: 20;
-            position: absolute;
+            height: 100%;
             top: 0;
             left: 0;
+            z-index: -1;
+            background-color: #000;
         }
 
-        h1 {
-            color: rgb(162, 0, 255);
-            padding-bottom: 6px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            20%, 10%, 0% {
-                text-shadow: 0 0 5px rgb(162, 0, 255), 0 0 20px #e100ff, 0 0 30px #e100ff, 0 0 40px #e100ff;
-            }
-        }
-
-        #viewer-count {
-            font-size: 18px;
-            position: absolute;
-            bottom: 5%;
-            left: 5%;
+        /* Ensure the content takes up the full height as needed */
+        body {
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
+            flex-direction: column;
         }
 
-        #viewer-count i {
-            color: rgb(162, 0, 255);
-        }
-
-        .switch {
-            position: absolute;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            left: 5%;
-            top: 3%;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-            box-shadow: 0 0 5px #4400ff, 0 0 15px #4400ff, 0 0 25px #4400ff, 0 0 35px #4400ff;
-            animation: button-glow 2s infinite ease-in-out;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #4400ff;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        @keyframes button-glow {
-            0%, 100% {
-                box-shadow: 0 0 5px #6200ff, 0 0 15px #6200ff, 0 0 25px #6200ff, 0 0 35px #6200ff;
-            }
-
-            50% {
-                box-shadow: 0 0 10px #4400ff, 0 0 20px #4400ff, 0 0 30px #4400ff, 0 0 40px #4400ff;
-            }
-        }
-
-        #button-text {
-            animation: text-glow 2s infinite ease-in-out;
-        }
-
-        @keyframes text-glow {
-            0%, 100% {
-                text-shadow: 0 0 5px #6200ff, 0 0 15px #6200ff, 0 0 25px #6200ff, 0 0 35px #6200ff;
-            }
-
-            50% {
-                text-shadow: 0 0 10px #4400ff, 0 0 20px #4400ff, 0 0 30px #4400ff, 0 0 40px #4400ff;
-            }
-        }
-
-        .icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .icons a {
-            color: rgb(48, 0, 161);
-            transition: color 0.3s;
-        }
-
-        .icons a:hover {
-            color: #740083;
-        }
-
-        /* Additional button styles */
-        .glow-button {
-            color: #fff;
-            background-color: #6200ff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            box-shadow: 0 0 10px #6200ff;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-
-        .glow-button:hover {
-            background-color: #4400ff;
-            box-shadow: 0 0 20px #4400ff;
+        main {
+            flex: 1;
         }
     </style>
 </head>
 <body>
-    <div id='hero'>
-        <video class="giphy" autoplay loop muted playsinline>
-            <source src="love.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="content d-flex align-items-center">
-            <div id="center" class="container text-center">
-                <h1>Landen.419</h1>
-                <span class="icons">
-                    <span id="block">
-                        <a href="https://discord.gg/PEjQMcuVBF" target="_blank"><i class="fab fa-discord fa-2x"></i></a>
-                    </span>
-                    <span id="block">
-                        <a href="https://github.com/pearlism" target="_blank"><i class="fab fa-github fa-2x"></i></a>
-                    </span>
-                    <span id="block">
-                        <a href="https://www.instagram.com/landen.419/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
-                    </span>
-                </span>
-                <!-- New Buttons -->
-                <a href="about.html">
-                    <button class="btn btn-primary mt-4 glow-button">Valorant Tools</button>
-                </a>
-                <a href="tool2.html">
-                    <button class="btn btn-primary mt-4 glow-button">Windows Tools</button>
-                </a>
-                <a href="disc.html"
-                    <button class="btn btn-primary mt-4 glow-button">MultiTools</button>
-                </a>
-                <a href="R6.html"
-                    <button class="btn btn-primary mt-4 glow-button">R6 Tools</button>
-                </a>
-                <a href="downloads.html">
-                    <button class="btn btn-primary mt-4 glow-button">About</button>
-                </a>
-                                
-                <!-- Viewer count section -->
-                <div id="viewer-count">
-                    <i class="fas fa-eye"></i>
-                    <span id="view-count">2,836</span> Views
-                </div>
-            </div>
+    <div id="particles-js"></div> <!-- Particles Background -->
 
-            <div>
-                <p id="button-text" class="switch" style="color:#6200ff; margin-left:6px; margin-top: 45px;">Click me</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                    <audio id="myaudio"> <source src="dont.mp4" type="audio/mp4"> </audio>
-                </label>
+    <header>
+        <a class="logo" href="#">Landen419</a>
+        <nav>
+            <ul>
+                <li><a class="lis" href="#home">Home</a></li>
+                <li><a href="#services">More</a></li>
+               
+                <li><a href="#aboutme">About me</a></li>
+                
+              </ul>
+        </nav>
+        <a class="button" href="#contactme">Contact me</a>
+        <i class="bx iconn bx-menu-alt-right"></i>
+        <div class="dropdown" id="dropdown">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">More</a></li>
+               
+                <li><a href="#aboutme">About me</a></li>
+                
+                <a class="button dropdownbtn" href="#contactme">Contact me</a>
+            </ul>
+        </div>
+    </header>
+    
+    <main class="tagline" id="home">
+        <div class="content">
+            <div class="content-image">
+                <img src="images/3843527-200.png" alt="">
+            </div>
+            <div class="content-text">
+                <h2>Hi, I'm Landen <span class="purple">419</span></h2>
+                <p class="p">I'm a young professional web developer and also Media Creator<br>ive been doing media for couple years along with different games</p>
             </div>
         </div>
+    </main>
+    <h1 id="services" class="center white abitdown tagline">More</h1>
+    <section class="services-section tagline">
+        <div class="service-box">
+          <i class='bx bx-code-alt service-icon'></i>
+          <h3 class="service-title">Web Developer</h3>
+          <p class="service-description">Custom websites, HTML, CSS, JavaScript, React, Angular. I can design and develop modern, responsive websites that cater to your specific needs. From static sites to dynamic web applications.</p>
+          <div class="service-overlay">
+            <div class="service-overlay-content">
+              <h3 class="service-overlay-title">Web Developer</h3>
+              <p class="service-overlay-description">Custom websites, HTML, CSS, JavaScript, React, Angular. I can design and develop modern, responsive websites that cater to your specific needs. From static sites to dynamic web applications.</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="service-box">
+          <i class='bx bx-cog service-icon'></i>
+          <h3 class="service-title">Media</h3>
+          <p class="service-description">I Stream and make tiktoks and youtube vids promoting Servers, i have around 28k on tiktok. ive created videos Visuals.gg, Klarr.gg, Aether, Noxar, Linear, Vanta, Redengine, QLM, ect.</p>
+          <div class="service-overlay">
+            <div class="service-overlay-content">
+              <h3 class="service-overlay-title">Media</h3>
+              <p class="service-overlay-description">I Stream and make tiktoks and youtube vids promoting Servers, i have around 28k on tiktok. ive created videos Visuals.gg, Klarr.gg, Aether, Noxar, Linear, Vanta, Redengine, QLM, ect.</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="service-box">
+          <i class='bx bx-game service-icon'></i>
+          <h3 class="service-title">About</h3>
+          <p class="service-description">If you wanna learn, know more. please contact me or hire me!!</p>
+          <div class="service-overlay">
+            <div class="service-overlay-content">
+              <h3 class="service-overlay-title">About</h3>
+              <p class="service-overlay-description">If you wanna learn, know more. please contact me or hire me!!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      </section>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function () {
-                var myAudio = document.getElementById("myaudio");
-                var more = 0;
-                $('.round').click(function () {
-                    if (more % 2 === 0) {
-                        $(myAudio)[0].play();
-                        $('#button-text').text(' '); 
-                    } else {
-                        $(myAudio)[0].pause();
-                        $('#button-text').text('');
+      <h1 class="white center abitdown down tagline">Skills level</h1>
+      <div tagline class="skill-card tagline">
+        <i class='bx bx-code skill-icon'></i>
+        <h3>Web Development</h3>
+        <div class="skill-details">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 70%;"></div>
+          </div>
+          <div class="skill-level">Proficient</div>
+        </div>
+        <p>HTML, CSS, JavaScript, React</p>
+      </div>
+      
+      <div class="skill-card tagline">
+        <i class='bx bx-cog skill-icon'></i>
+        <h3>Media Creation</h3>
+        <div class="skill-details">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 80%;"></div>
+          </div>
+          <div class="skill-level">Intermediate</div>
+        </div>
+        <p>Youtube, Tiktok</p>
+      </div>
+      
+      <div class="skill-card tagline">
+        <i class='bx bx-game skill-icon'></i>
+        <h3>Games</h3>
+        <div class="skill-details">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 90%;"></div>
+          </div>
+          <div class="skill-level">Expert</div>
+        </div>
+        <p>Fortnite, Siege, Fivem, Valorant</p>
+      </div>
+      
+      
+      <section id="aboutme" class="tagline about-section">
+        <h2 class="about-title abitdown">About Me</h2>
+        <div class="about-container">
+          <div class="about-box">
+            <div class="about-image">
+              <img src="images/3843527-200.png" alt="Landen.419">
+            </div>
+            <div class="about-content">
+              <div class="about-details">
+                <div class="about-info">
+                  <span class="about-label">Name:</span>
+                  <span class="about-value">Landen</span>
+                </div>
+                <div class="about-info">
+                  <span class="about-label">Age:</span>
+                  <span class="about-value">17</span>
+                </div>
+                <div class="about-info">
+                  <span class="about-label">Experience:</span>
+                  <span class="about-value">3+ years of doing media</span>
+                </div>
+                <div class="about-info">
+                  <span class="about-label">Platforms</span>
+                  <span class="about-value smaller">Youtube, Tiktok</span>
+                </div>
+              </div>
+              <p class="about-description">
+                Im landen (user.pass) i love doing media, i get servers members very fast. ill always keep you updated and do everything you ask. Please hire if you will!! 
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+      
+      <h1 class="tagline white center abitdown">
+      </h1>
+      <div id="contactme" class="tagline background">
+        <div class="container">
+          <div class="screen">
+            <div class="screen-header">
+              <div class="screen-header-left">
+                <div class="screen-header-button close"></div>
+                <div class="screen-header-button maximize"></div>
+                <div class="screen-header-button minimize"></div>
+              </div>
+              <div class="screen-header-right">
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+              </div>
+            </div>
+            <div class="screen-body">
+              
+              <div class="screen-body-item left">
+                <div class="app-title">
+                  <h1>Contact Me</h1>
+        <div class="contact">
+            
+            <span>Discord: User.pass Tiktok: Landen.419</span>
+          </div>
+                      <style>
+                        #status-message {
+                          color: rgba(204, 0, 255, 0);
+                        }
+                      </style>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    <script>
+      ScrollReveal().reveal('.headline');
+    </script>
+      <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
                     }
-                    more++;
-                });
-            });
-        </script>
+                },
+                "color": {
+    "value": ["#6a0dad", "#FFC0CB", "#0000ff"]  // purple, pink, blue //landen419
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
