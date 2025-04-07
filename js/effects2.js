@@ -1,0 +1,5 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const imgSrc = "https://lanyard.cnrad.dev/api/1339655489411092481?hideTimestamp=false&animatedDecoration=false&showDisplayName=true&theme=darkhttps://lanyard.cnrad.dev/api/1339655489411092481?hideTimestamp=true&animatedDecoration=true&showDisplayName=true&theme=dark&animated=true&hideBadges=true&hideActivity=true&hideDecoration=true&hideStatus=true&hideClan=true&hideProfile=true&hideSpotify=truehttps://lanyard.cnrad.dev/api/1339655489411092481?hideTimestamp=false&animatedDecoration=false&showDisplayName=true&theme=dark&animated=false&hideBadges=false&hideActivity=false&hideDecoration=false&hideStatus=false&hideClan=false&hideProfile=false&hideSpotify=false&idleMessage=probs%20ratting%20https://lanyard.cnrad.dev/api/1339655489411092481?hideTimestamp=false&animatedDecoration=false&showDisplayName=true&theme=dark&animated=false&hideBadges=false&hideActivity=false&hideDecoration=false&hideStatus=false&hideClan=false&hideProfile=false&hideSpotify=false&idleMessage=probs%20ratting%20&bg=0000000";
+    const imgElement = document.getElementById('rpc');
+    imgElement.src = imgSrc;
+});
