@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landen Portfolio Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/all.min.css">
+</head>
+<div class="landen-particles" id="landenParticles"></div>
+<body class="theme-dark">
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">Landen419</div>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#" id="theme-toggle">Themes <i class="fas fa-caret-down"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="theme-menu" id="theme-menu">
+                    <ul>
+                        <li data-theme="dark" class="active"><a href="#"><i class="fas fa-moon"></i> Dark (Default)</a></li>
+                        <li data-theme="blue"><a href="#"><i class="fas fa-water"></i> Blue</a></li>
+                        <li data-theme="light"><a href="#"><i class="fas fa-sun"></i> Light</a></li>
+                        <li data-theme="spotify"><a href="#"><i class="fab fa-spotify"></i> Spotify</a></li>
+                        <li data-theme="windows"><a href="#"><i class="fab fa-windows"></i> Windows</a></li>
+                        <li data-theme="mac"><a href="#"><i class="fab fa-apple"></i> Mac</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1 class="reveal-text">Hey, I'm <span>Landen</span></h1>
+                    <p class="reveal-text">Im 18 Years old, i develope websites and along with other projects. My 2 main languages are html, and c++. I go to school for Cyber Security and Networking.</p>
+                    <div class="hero-cta reveal-item">
+                        <a href="#about" class="btn secondary-btn">What are my skills?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal-text">About Me</h2>
+                <div class="separator reveal-item"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text reveal-item">
+                    <p>I'm a senior at Millstream Career Center, where I've been studying Cybersecurity and Networking for the past two years. I have a strong passion for computers and technology, and I'm always eager to learn more.</p>
+                    <p>I'm hardworking, knowledgeable in troubleshooting, and dedicated to building a future in IT. My experience has given me a solid foundation, and I'm excited to continue growing and pursuing my goals in this field.</p>
+                </div>                
+                <div class="skills reveal-item">
+                    <h3>Skills (Some stronger than others)</h3>
+                    <div class="skill-tags">
+                        <span>HTML & CSS</span>
+                        <span>JavaScript</span>
+                        <span>C++</span>
+                        <span>Node.js</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal-text">Get In Touch</h2>
+                <div class="separator reveal-item"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info reveal-item">
+                    <p>If you would like to contact me, you can reach me here. </p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                            <a href="" target="_blank">landenh132@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form" class="contact-form reveal-item">
+                    <div class="form-group">
+                      <input type="text" name="user_name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" name="user_email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                      <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                  </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>2025 Landen Hansen. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="spotify-widget" class="spotify-widget">
+        <div class="widget-header">
+            <span id="spotify-status">Landen is currently listening to:</span>
+            <div class="spotify-logo"><i class="fab fa-spotify"></i></div>
+        </div>
+        <div class="widget-content">
+            <img id="album-art" class="album-art" src="48.html" alt="Album Art">
+            <div class="song-info">
+                <a id="song-title" class="song-title" href="#" target="_blank">Loading...</a>
+                <a id="song-artist" class="song-artist" href="#" target="_blank">By Unknown Artist</a>
+                <a id="song-album" class="song-album" href="#" target="_blank">On Unknown Album</a>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="time-display">
+                <div id="current-time" class="current-time">0:00</div>
+                <div id="total-time" class="total-time">0:00</div>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="js/email-decode.min.js"></script><script src="js/scripts.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        const landenInitParticles = () => {
+            const container = document.getElementById('landenParticles');
+            const count = window.innerWidth < 768 ? 30 : 60;
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'landen-particle';
+                
+                const size = Math.random() * 2 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                particle.style.animationDelay = `${Math.random() * 4}s`;
+                particle.style.animationDuration = `${3 + Math.random() * 5}s`;
+                
+                const opacity = 0.2 + Math.random() * 0.5;
+                particle.style.opacity = `${opacity}`;
+                
+                container.appendChild(particle);
+            }
+        };
+    
+        const landenHandleScroll = () => {
+            const nav = document.getElementById('landenNav');
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        };
+    
+        const landenInitSmoothScroll = () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
+    
+        const landenInitAnimations = () => {
+            const animateOnScroll = (elements) => {
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.animation = 'landenSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', () => {
+                animateOnScroll(document.querySelectorAll('.landen-feature-card'));
+                animateOnScroll(document.querySelectorAll('.landen-pricing-card'));
+            });
+        };
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            landenInitParticles();
+            landenHandleScroll();
+            landenInitSmoothScroll();
+            landenInitAnimations();
+        });
+    
+        window.addEventListener('scroll', landenHandleScroll);
+    </script>
+<script>
+  (function(){
+    emailjs.init("IgqUWrzy6RToSeyzG"); // From your EmailJS dashboard
+  })();
+</script>
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      emailjs.sendForm('service_6neaa3n', 'template_lz6x1gt', this)
+        .then(function() {
+          alert('Message sent successfully!');
+          document.getElementById('contact-form').reset(); 
+        }, function(error) {
+          alert('Failed to send message. Please try again.\n' + JSON.stringify(error));
+        });
+    });
+  </script>
+
+</body></html>
