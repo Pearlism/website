@@ -1,1595 +1,551 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landen1337 - Best up-to-date executor</title>
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0070f3;
-            --primary-dark: #0050d3;
-            --secondary: #7928ca;
-            --accent: #00c6ff;
-            --bg: #050505;
-            --surface: #0f0f13;
-            --surface-2: #16161d;
-            --text: #ffffff;
-            --text-sec: rgba(255, 255, 255, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --success: #0070f3;
-            --warning: #f5a623;
-            --danger: #ff0080;
-            --header-bg: rgba(17, 17, 17, 0.6);
-            --header-icon: #ffffff;
-            --transition-fast: 0.15s;
-            --transition-medium: 0.25s;
-            --transition-slow: 0.4s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        body {
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(0, 112, 243, 0.08), transparent 35%),
-                radial-gradient(circle at 85% 85%, rgba(121, 40, 202, 0.08), transparent 35%),
-                radial-gradient(circle at 50% 50%, rgba(0, 198, 255, 0.05), transparent 50%),
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px, 30px 30px;
-            background-attachment: fixed;
-            background-position: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary);
-            transition: color var(--transition-fast) ease;
-        }
-
-        a:hover {
-            color: var(--accent);
-        }
-
-        .cont {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        header {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: auto;
-            max-width: none;
-            z-index: 1000;
-            transition: all var(--transition-medium) ease;
-            backdrop-filter: blur(10px);
-            background: rgba(17, 17, 17, 0.8);
-            border-radius: 50px;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            will-change: transform;
-        }
-
-        .hdr-cont {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .nav-icons {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-icon {
-            color: var(--header-icon);
-            font-size: 1.1rem;
-            transition: all var(--transition-fast) ease;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            will-change: transform, color;
-        }
-
-        .nav-icon:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .nav-icon.active {
-            color: var(--primary);
-        }
-
-        .nav-icon.disabled {
-            color: rgba(255, 255, 255, 0.3);
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        .nav-sep {
-            height: 15px;
-            width: 1px;
-            background-color: rgba(255, 255, 255, 0.2);
-            margin: 0 2px;
-        }
-
-        .nav-tip {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-fast) ease;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        .nav-icon:hover .nav-tip {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-drop {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 0.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            display: none;
-            min-width: 200px;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 19, 0.9);
-        }
-
-        .menu-drop.active {
-            display: block;
-            animation: fadeIn 0.2s forwards;
-        }
-
-        .menu-drop a {
-            display: block;
-            padding: 0.75rem 1rem;
-            color: var(--text-sec);
-            border-radius: 8px;
-            transition: all var(--transition-fast) ease;
-        }
-
-        .menu-drop a:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text);
-        }
-
-        .cta-btn {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast) ease;
-            display: inline-block;
-            will-change: transform, box-shadow;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 112, 243, 0.4);
-            color: white;
-        }
-
-        .cta-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3);
-        }
-
-        .cta-btn.disabled {
-            background: linear-gradient(to right, #666, #888);
-            cursor: not-allowed;
-            opacity: 0.7;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: visible;
-            padding-top: 80px;
-            margin-bottom: 0;
-            padding-bottom: 0;
-            background-color: transparent;
-        }
-
-        .hero-cont {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            background: linear-gradient(to right, var(--text), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s forwards 0.2s;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-sec);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s forwards 0.3s;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s forwards 0.4s;
-        }
-
-        .hero-btns a {
-            min-width: 180px;
-            text-align: center;
-        }
-
-        .sec-btn {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast) ease;
-            display: inline-block;
-            will-change: transform, border-color, box-shadow;
-        }
-
-        .sec-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            color: var(--text);
-        }
-
-        .sec-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .sec-btn.disabled {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.1);
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .modal.active {
-            display: flex;
-            animation: modalFadeIn 0.15s forwards;
-        }
-
-        .modal-cont {
-            background: var(--surface);
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            padding: 2rem;
-            position: relative;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalSlideIn 0.2s forwards;
-            transform: translateY(-20px);
-            opacity: 0;
-            will-change: transform, opacity;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes modalSlideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(-20px); 
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0); 
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.2rem;
-            color: var(--text-sec);
-            cursor: pointer;
-            transition: all var(--transition-fast) ease;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            will-change: transform, color, background-color;
-        }
-
-        .modal-close:hover {
-            color: var(--danger);
-            transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .req-list {
-            margin: 1.5rem 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .req-list li {
-            margin-bottom: 1.2rem;
-            color: var(--text-sec);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            transition: all var(--transition-fast) ease;
-            border: 1px solid transparent;
-            will-change: transform, background-color, border-color;
-        }
-
-        .req-list li:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--border);
-            transform: translateY(-2px);
-        }
-
-        .req-list li i {
-            color: var(--primary);
-            margin-top: 0.25rem;
-        }
-
-        .req-list .req-name {
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .req-list .req-desc {
-            font-size: 0.9rem;
-            color: var(--text-sec);
-        }
-
-        .req-list .req-link {
-            margin-top: 0.5rem;
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            background: rgba(0, 112, 243, 0.1);
-            border-radius: 4px;
-            font-size: 0.8rem;
-            transition: all var(--transition-fast) ease;
-            will-change: transform, background-color;
-        }
-
-        .req-list .req-link:hover {
-            background: rgba(0, 112, 243, 0.2);
-            transform: translateX(2px);
-        }
-
-        .modal-btns {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-btns {
-                flex-direction: row;
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            .hero-btns a {
-                min-width: 160px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-btns {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .hero-btns a {
-                width: 100%;
-                min-width: unset;
-            }
-        }
-
-        .fl-wrap {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .fl-el {
-            position: absolute;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.15;
-            z-index: -1;
-            will-change: transform;
-        }
-
-        .fl-el:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            right: 10%;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-
-        .fl-el:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 20%;
-            left: 5%;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            animation: float 15s infinite alternate-reverse ease-in-out;
-        }
-
-        .fl-el:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 20%;
-            background: linear-gradient(135deg, var(--danger), var(--secondary));
-            animation: float 18s infinite alternate ease-in-out;
-        }
-
-        section {
-            position: relative;
-            background-color: transparent;
-            margin: 0;
-            padding: 8rem 0;
-            border: none;
-            outline: none;
-        }
-
-        #features {
-            margin-top: 0;
-            padding-top: 8rem;
-            padding-bottom: 8rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .sec-ttl {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            will-change: transform, opacity;
-        }
-
-        .sec-ttl.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .sec-sub {
-            color: var(--text-sec);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            max-width: 700px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease 0.1s;
-            will-change: transform, opacity;
-        }
-
-        .sec-sub.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .grad-txt {
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .card-cont {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all var(--transition-medium) ease;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 19, 0.8);
-            will-change: transform, opacity, box-shadow, border-color;
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(0, 112, 243, 0.3);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition-medium) ease;
-            will-change: transform;
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            background: rgba(0, 112, 243, 0.1);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            transition: all var(--transition-fast) ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.05);
-            background: rgba(0, 112, 243, 0.15);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            transition: color var(--transition-fast) ease;
-        }
-
-        .card:hover h3 {
-            color: var(--primary);
-        }
-
-        .card p {
-            color: var(--text-sec);
-            margin-bottom: 1.5rem;
-        }
-
-        .card-list {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .card-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-sec);
-            transition: transform var(--transition-fast) ease;
-        }
-
-        .card:hover .card-list li {
-            transform: translateX(2px);
-        }
-
-        .card-list li i {
-            color: var(--primary);
-            margin-top: 0.25rem;
-        }
-
-        #community {
-            padding: 8rem 0;
-            margin: 0;
-            position: relative;
-        }
-
-        .cta-sec {
-            background: rgba(15, 15, 19, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 4rem;
-            text-align: center;
-            margin: 0;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.6s ease;
-            will-change: transform, opacity;
-        }
-
-        .cta-sec::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 112, 243, 0.1), transparent 70%);
-            z-index: 0;
-        }
-
-        .cta-cont {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta-sec h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-sec p {
-            color: var(--text-sec);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-btns {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        footer {
-            background: rgba(15, 15, 19, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 5rem 0 2rem;
-            position: relative;
-            overflow: hidden;
-            margin-top: 0;
-            border-top: none;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-        }
-
-        .ft-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .ft-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            transition: transform var(--transition-fast) ease;
-        }
-
-        .ft-logo:hover {
-            transform: translateY(-2px);
-        }
-
-        .ft-desc {
-            color: var(--text-sec);
-            margin-bottom: 1.5rem;
-        }
-
-        .ft-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .soc-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--surface-2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-sec);
-            transition: all var(--transition-fast) ease;
-            border: 1px solid var(--border);
-            will-change: transform, background-color, color;
-        }
-
-        .soc-icon:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .ft-title {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .ft-links {
-            list-style: none;
-        }
-
-        .ft-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .ft-links a {
-            color: var(--text-sec);
-            transition: all var(--transition-fast) ease;
-            will-change: color, padding-left;
-        }
-
-        .ft-links a:hover {
-            color: var(--primary);
-            padding-left: 5px;
-        }
-
-        .ft-bot {
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-sec);
-            font-size: 0.9rem;
-        }
-
-        .ft-bot-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .ft-bot-links a {
-            color: var(--text-sec);
-            transition: color var(--transition-fast) ease;
-        }
-
-        .ft-bot-links a:hover {
-            color: var(--primary);
-        }
-
-        .dl-msg {
-            font-size: 0.9rem;
-            color: var(--text-sec);
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            transition: all var(--transition-medium) ease;
-        }
-
-        .dl-msg.visible {
-            opacity: 1;
-            height: auto;
-        }
-
-        .custom-alert {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100%);
-            background: var(--surface);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            min-width: 300px;
-            max-width: 90%;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            will-change: transform;
-        }
-
-        .custom-alert.active {
-            transform: translateX(-50%) translateY(20px);
-        }
-
-        .alert-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .alert-content {
-            flex-grow: 1;
-        }
-
-        .alert-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            font-size: 1rem;
-        }
-
-        .alert-message {
-            color: var(--text-sec);
-            font-size: 0.9rem;
-        }
-
-        .alert-close {
-            color: var(--text-sec);
-            cursor: pointer;
-            transition: all var(--transition-fast) ease;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
-            will-change: transform, color, background-color;
-        }
-
-        .alert-close:hover {
-            color: var(--danger);
-            background: rgba(255, 255, 255, 0.05);
-            transform: rotate(90deg);
-        }
-
-        .alert-success .alert-icon {
-            color: #10b981;
-        }
-
-        .alert-error .alert-icon {
-            color: #ef4444;
-        }
-
-        .alert-info .alert-icon {
-            color: var(--primary);
-        }
-
-        .alert-warning .alert-icon {
-            color: #f59e0b;
-        }
-
-        @media (max-width: 480px) {
-            .custom-alert {
-                min-width: 90%;
-                padding: 0.75rem 1rem;
-            }
-            
-            .alert-icon {
-                font-size: 1.25rem;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0);
-            }
-            50% {
-                transform: translate(15px, -15px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .cta-sec {
-                padding: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                width: 95%;
-                padding: 10px 15px;
-                top: 10px;
-            }
-            
-            .hdr-cont {
-                justify-content: center;
-            }
-            
-            .nav-icons {
-                gap: 1.2rem;
-                justify-content: center;
-            }
-            
-            .nav-icon {
-                font-size: 1rem;
-                padding: 5px 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 8px 15px;
-                width: 98%;
-            }
-            
-            .nav-icons {
-                gap: 0.8rem;
-            }
-            
-            .nav-icon {
-                font-size: 0.95rem;
-                padding: 6px;
-            }
-            
-            .nav-sep {
-                margin: 0 2px;
-            }
-        }
-
-        @media (max-width: 375px) {
-            header {
-                padding: 8px 10px;
-                width: 98%;
-            }
-            
-            .nav-icons {
-                gap: 0.6rem;
-            }
-            
-            .nav-icon {
-                font-size: 0.9rem;
-                padding: 5px;
-            }
-            
-            .nav-sep {
-                margin: 0 1px;
-            }
-            
-            .cta-sec {
-                padding: 1.5rem;
-            }
-            
-            .cta-sec h2 {
-                font-size: 1.75rem;
-            }
-            
-            .cta-sec p {
-                font-size: 1rem;
-            }
-        }
-
-        .dev-ft {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.2);
-            z-index: 1000;
-            pointer-events: none;
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offset Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .landen-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0, 123, 255, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 80%, rgba(0, 123, 255, 0.06) 0%, transparent 50%),
+                  #000000;
+      z-index: -1;
+    }
+
+    .landen-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .landen-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .landen-title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #007bff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: landen-fade-in 1s ease-out;
+    }
+
+    .landen-subtitle {
+      color: #888;
+      font-size: 1.1rem;
+      animation: landen-fade-in 1s ease-out 0.2s both;
+    }
+
+    .landen-copy-all {
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: landen-fade-in 1s ease-out 0.4s both;
+      margin: 0.5rem;
+    }
+
+    .landen-copy-all:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    }
+
+    .landen-copy-all:active {
+      transform: translateY(0);
+    }
+
+    .landen-copy-all:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .landen-copy-all::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .landen-copy-all:hover::before {
+      left: 100%;
+    }
+
+    .landen-upload-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .landen-upload-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .landen-file-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed rgba(0, 123, 255, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .landen-file-input:hover {
+      border-color: rgba(0, 123, 255, 0.5);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .landen-file-input input[type="file"] {
+      width: 100%;
+      padding: 0.5rem;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .landen-download-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .landen-download-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .landen-status {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .landen-status.success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+    }
+
+    .landen-status.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+
+    .landen-offsets {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+      animation: landen-fade-in 1s ease-out 0.6s both;
+    }
+
+    .landen-offset-item {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: landen-slide-up 0.6s ease-out both;
+    }
+
+    .landen-offset-item:nth-child(odd) {
+      animation-delay: calc(var(--index) * 0.1s);
+    }
+
+    .landen-offset-item:nth-child(even) {
+      animation-delay: calc(var(--index) * 0.1s + 0.05s);
+    }
+
+    .landen-offset-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .landen-offset-item:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 123, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 123, 255, 0.1);
+    }
+
+    .landen-offset-item:hover::before {
+      opacity: 1;
+    }
+
+    .landen-offset-key {
+      font-weight: 600;
+      margin-right: 1.5rem;
+      min-width: 200px;
+      color: #ffffff;
+      font-size: 1.1rem;
+    }
+
+    .landen-offset-value {
+      font-family: 'JetBrains Mono', monospace;
+      color: #007bff;
+      flex: 1;
+      word-break: break-all;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 123, 255, 0.1);
+      border-radius: 8px;
+      margin-right: 1rem;
+    }
+
+    .landen-copy-btn {
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 123, 255, 0.1) 100%);
+      color: #007bff;
+      border: 1px solid rgba(0, 123, 255, 0.3);
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .landen-copy-btn:hover {
+      background: linear-gradient(135deg, rgba(0, 123, 255, 0.3) 0%, rgba(0, 123, 255, 0.2) 100%);
+      border-color: rgba(0, 123, 255, 0.5);
+      transform: scale(1.05);
+    }
+
+    .landen-copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .landen-copied {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%) !important;
+      color: #22c55e !important;
+      border-color: rgba(34, 197, 94, 0.3) !important;
+    }
+
+    .landen-loading {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #888;
+      padding: 3rem;
+      animation: landen-pulse 2s infinite;
+    }
+
+    .landen-error {
+      text-align: center;
+      color: #ef4444;
+      padding: 2rem;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+
+    @keyframes landen-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes landen-slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes landen-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes landen-copy-success {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .landen-copy-animation {
+      animation: landen-copy-success 0.3s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .landen-container {
+        padding: 2rem 1rem;
+      }
+      
+      .landen-title {
+        font-size: 2rem;
+      }
+      
+      .landen-offset-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .landen-offset-key {
+        min-width: auto;
+        margin-right: 0;
+      }
+      
+      .landen-offset-value {
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="fl-wrap">
-        <div class="fl-el" style="transform: translate(-10.6444px, 10.5687px);"></div>
-        <div class="fl-el" style="transform: translate(0.0428577px, -14.9999px);"></div>
-        <div class="fl-el" style="transform: translate(15px, 0.0357151px);"></div>
+  <div class="landen-background"></div>
+  
+  <div class="landen-container">
+    <div class="landen-header">
+      <h1 class="landen-title">Offset Viewer</h1>
+      <p class="landen-subtitle">Made by landen <3</p>
+      <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
     </div>
-    <header id="header">
-        <div class="hdr-cont">
-            <div class="nav-icons">
-                <a href="#home" class="nav-icon active" data-section="home">
-                    <i class="fas fa-home"></i>
-                    <span class="nav-tip">Home</span>
-                </a>
-                <a href="#features" class="nav-icon" data-section="features">
-                    <i class="fas fa-layer-group"></i>
-                    <span class="nav-tip">Features</span>
-                </a>
-                <a href="#community" class="nav-icon" data-section="community">
-                    <i class="fas fa-users"></i>
-                    <span class="nav-tip">Community</span>
-                </a>
-                <div class="nav-sep"></div>
-                <a href="https://link-hub.net/1353272/landen1337-executor" class="nav-icon disabled" data-section="download" id="dl-icon">
-                    <i class="fas fa-download"></i>
-                    <span class="nav-tip">Download</span>
-                </a>
-                <a href="https://discord.gg/r3V4fZjGHH" class="nav-icon" data-section="discord">
-                    <i class="fab fa-discord"></i>
-                    <span class="nav-tip">Discord</span>
-                </a>
-            </div>
-        </div>
-    </header>
-    <section class="hero" id="home">
-        <div class="cont">
-            <div class="hero-cont">
-                <h1>Landen1337</h1>
-                <p>Landen1337 is the best free Roblox executor, offering fast, smooth performance with up-to-date features for seamless script execution. Whether you're new or experienced, Landen1337 makes running scripts effortless.</p>
-                <div class="hero-btns">
-                    <a href="https://link-hub.net/1353272/landen1337-executor" id="download-button" class="cta-btn disabled" style="pointer-events: none;">Not Available for Mac</a>
-                    <a href="https://discord.gg/r3V4fZjGHH" class="sec-btn">Join Discord</a>
-                    <a href="https://link-hub.net/1353272/landen1337-executor" id="api-button" class="sec-btn disabled" style="pointer-events: none;">API Not Available</a>
-                </div>
-                <div id="download-message" class="dl-msg visible">
-                    <strong>Currently not supported on Mac</strong><br>
-                    Join our community to stay updated on future releases and alternative options!
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="modal" id="req-modal">
-        <div class="modal-cont">
-            <div class="modal-close" id="modal-close">
-                <i class="fas fa-times"></i>
-            </div>
-            <h3 class="modal-title">Download Requirements</h3>
-            <p>Before downloading Landen1337, please ensure you have the following requirements installed:</p>
-            <ul class="req-list">
-                <li>
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <div class="req-name">Microsoft .NET Framework 4.8</div>
-                        <div class="req-desc">Required for core functionality and runtime support.</div>
-                        <a href="https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48" class="req-link" target="_blank">
-                            <i class="fas fa-download"></i> Download .NET Framework
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <div class="req-name">Visual C++ Redistributable 2015-2022</div>
-                        <div class="req-desc">Needed for proper execution of native code components.</div>
-                        <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" class="req-link" target="_blank">
-                            <i class="fas fa-download"></i> Download VC++ (64-bit)
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <p>These components are essential for Landen1337 to function properly on your system.</p> 
-            <div class="modal-btns">
-                <a href="#home" class="sec-btn" id="cancel-download">Cancel</a>
-                <a href="https://link-hub.net/1353272/landen1337-executor" class="cta-btn" id="confirm-download">Download Landen1337</a>
-            </div>
-        </div>
+
+    <div class="landen-upload-section">
+      <h2 class="landen-upload-title">Update Your Offset File </h2>
+      <div>(must have "#define" infront of the offset, and offset names must much the ones below.)</div>
+      <div class="landen-file-input">
+        <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
+      </div>
+      <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
+      <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
+      <div id="status-message"></div>
     </div>
-    <section id="features">
-        <div class="cont">
-            <h2 class="sec-ttl">Unique and User-Friendly Features</h2>
-            <p class="sec-sub">We deliver the ultimate user experience, prioritizing comfort and seamless interaction. And that's just the beginning—our features go far beyond to elevate your experience!</p>
-            
-            <div class="card-cont">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>UNC & sUNC</h3>
-                    <p>Landen1337 offers compatibility with sUNC and UNC, delivering smooth functionality for various features.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check"></i> Premium UNC & sUNC Support</li>
-                        <li><i class="fas fa-check"></i> Fast, Reliable Execution</li>
-                        <li><i class="fas fa-check"></i> Rock-Solid Stability</li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <h3>Script Support</h3>
-                    <p>Landen1337 provides reliable, high-performance scripting tools for seamless execution, maximizing efficiency and potential in Roblox.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check"></i> Full Script Compatibility</li>
-                        <li><i class="fas fa-check"></i> Blazing Fast Performance</li>
-                        <li><i class="fas fa-check"></i> Zero Latency</li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-plug"></i>
-                    </div>
-                    <h3>Optimization</h3>
-                    <p>Landen1337's optimized design ensures minimal impact on your FPS, allowing for smooth and efficient gameplay.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check"></i> Seamless Performance</li>
-                        <li><i class="fas fa-check"></i> Effortless Efficiency</li>
-                        <li><i class="fas fa-check"></i> Ultra-Low Resource Consumption</li>                        
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>UI-Friendly Interface</h3>
-                    <p>The interface is intuitive, user-friendly, and effortlessly easy to navigate.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check"></i> Sleek, Stunning UI</li>
-                        <li><i class="fas fa-check"></i> Effortless Navigation</li>
-                        <li><i class="fas fa-check"></i> Intuitive and User-Centric</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="community">
-        <div class="cont">
-            <div class="cta-sec">
-                <div class="cta-cont">
-                    <h2>Unleash the power of Exploiting.</h2>
-                    <p>Ready to dominate the Roblox universe? Join our community and take control like never before!</p>
-                    <div class="cta-btns">
-                        <a href="https://discord.gg/r3V4fZjGHH" class="cta-btn">Join Our Community</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="cont">
-            <div class="ft-grid">
-                <div>
-                    <a href="#" class="ft-logo">
-                        <i class="fas fa-code"></i>
-                        <span>Landen1337</span>
-                    </a>
-                    <p class="ft-desc">Your go-to guide for dominating Roblox exploits, offering top-tier features for flawless execution and unbeatable performance.</p>
-                    <div class="ft-social">
-                        <a href="https://github.com/Pearlism" class="soc-icon"><i class="fab fa-github"></i></a>
-                        <a href="https://discord.gg/r3V4fZjGHH" class="soc-icon"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="ft-bot">
-                <p>© <span id="current-year">2025</span> Landen1337. All rights reserved.</p>
-                <div class="ft-bot-links">
-                    <a href="#home">Privacy</a>
-                    <a href="#home">Terms</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div class="dev-ft">
-        Developed by Landen1337.
+    
+    <div id="landen-offsets" class="landen-offsets">
+      <div class="landen-loading">Loading offsets...</div>
     </div>
-    <div class="custom-alert" id="custom-alert">
-        <div class="alert-icon">
-            <i class="fas fa-info-circle"></i>
-        </div>
-        <div class="alert-content">
-            <div class="alert-title">Alert Title</div>
-            <div class="alert-message">Alert message goes here</div>
-        </div>
-        <div class="alert-close" id="alert-close">
-            <i class="fas fa-times"></i>
-        </div>
-    </div>
-    <script>
-        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        const hdr = document.getElementById('header');
-        let lastScroll = 0;
-        let scrollTmr;
-        window.addEventListener('scroll', () => {
-            if (scrollTmr) return;
-            scrollTmr = setTimeout(() => {
-                if (window.scrollY > 50) {
-                    hdr.classList.add('scrolled');
+  </div>
+
+  <script>
+    const encodedUrl = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BsYXNtYW9udG9wcHU2YzIvb2Zmc2V0cy9yZWZzL2hlYWRzL21haW4vb2Zmc2V0cy5qc29u';
+    const landenUrl = atob(encodedUrl);
+    const landenOffsetsContainer = document.getElementById('landen-offsets');
+    const landenCopyAllBtn = document.getElementById('landen-copy-all');
+    const statusMessage = document.getElementById('status-message');
+    let currentOffsets = {};
+
+    function showStatus(message, isError = false) {
+      statusMessage.innerHTML = `<div class="landen-status ${isError ? 'error' : 'success'}">${message}</div>`;
+      setTimeout(() => {
+        statusMessage.innerHTML = '';
+      }, 5000);
+    }
+
+    async function landenLoadOffsets() {
+      try {
+        const response = await fetch(landenUrl);
+        if (!response.ok) throw new Error('Failed to fetch offsets');
+        const data = await response.json();
+        currentOffsets = data;
+
+        landenOffsetsContainer.innerHTML = ''; 
+        let allText = '';
+        let index = 0;
+
+        Object.entries(data).forEach(([key, value]) => {
+          allText += `${key}: ${value}\n`;
+
+          const div = document.createElement('div');
+          div.className = 'landen-offset-item';
+          div.style.setProperty('--index', index++);
+
+          const keySpan = document.createElement('span');
+          keySpan.className = 'landen-offset-key';
+          keySpan.textContent = key;
+
+          const valueSpan = document.createElement('span');
+          valueSpan.className = 'landen-offset-value';
+          valueSpan.textContent = value;
+
+          const btn = document.createElement('button');
+          btn.className = 'landen-copy-btn';
+          btn.textContent = 'Copy';
+          btn.onclick = () => landenCopyText(`${key}: ${value}`, btn);
+
+          div.appendChild(keySpan);
+          div.appendChild(valueSpan);
+          div.appendChild(btn);
+          landenOffsetsContainer.appendChild(div);
+        });
+
+        landenCopyAllBtn.disabled = false;
+        landenCopyAllBtn.onclick = () => landenCopyText(allText, landenCopyAllBtn, 'All Copied!', 'Copy All Offsets');
+      } catch (error) {
+        landenOffsetsContainer.innerHTML = `<div class="landen-error">Error loading offsets: ${error.message}</div>`;
+      }
+    }
+
+    function landenCopyText(text, btn, successText = 'Copied!', originalText = 'Copy') {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = successText;
+        btn.classList.add('landen-copied', 'landen-copy-animation');
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('landen-copied', 'landen-copy-animation');
+        }, 1500);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+
+    document.getElementById('update-offsets').addEventListener('click', async () => {
+      const fileInput = document.getElementById('upload-offsets');
+      const downloadLink = document.getElementById('download-updated');
+
+      if (!fileInput.files.length) {
+        showStatus('Please upload an offset file first.', true);
+        return;
+      }
+
+      if (Object.keys(currentOffsets).length === 0) {
+        showStatus('Latest offsets not loaded yet. Please wait...', true);
+        return;
+      }
+
+      try {
+        const file = fileInput.files[0];
+        const text = await file.text();
+        let updatedCount = 0;
+        const patterns = [
+          /#define\s+(\w+)\s+\(?\s*(0x[0-9a-fA-F]+)\s*\)?/gi,
+          /#define\s+(\w+)\s+\(?\s*(\d+)\s*\)?/gi,
+          /const\s+(\w+)\s*=\s*(0x[0-9a-fA-F]+|\\d+);?/gi,
+          /(\w+)\s*[=:]\s*(0x[0-9a-fA-F]+|\\d+)/gi
+        ];
+
+        let updatedText = text;
+        patterns.forEach(pattern => {
+          updatedText = updatedText.replace(pattern, (match, name, oldValue) => {
+            if (currentOffsets.hasOwnProperty(name)) {
+              const newValue = currentOffsets[name];
+              updatedCount++;
+              if (match.includes('#define')) {
+                if (match.includes('(') && match.includes(')')) {
+                  return `#define ${name} (${newValue})`;
                 } else {
-                    hdr.classList.remove('scrolled');
+                  return `#define ${name} ${newValue}`;
                 }
-                scrollTmr = null;
-            }, 10);
-        });
-        const obsOpts = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, obsOpts);
-        requestAnimationFrame(() => {
-            document.querySelectorAll('.sec-ttl, .sec-sub, .card, .cta-sec').forEach(el => {
-                obs.observe(el);
-            });
-        });
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const tgtId = this.getAttribute('href');
-                if (tgtId === '#') return;
-                const tgtEl = document.querySelector(tgtId);
-                if (tgtEl) {
-                    window.scrollTo({
-                        top: tgtEl.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        const flElms = document.querySelectorAll('.fl-el');
-        function animFLelms() {
-            flElms.forEach((el, idx) => {
-                const randX = Math.sin(Date.now() / (2000 + idx * 500)) * 15;
-                const randY = Math.cos(Date.now() / (2000 + idx * 500)) * 15;
-                
-                el.style.transform = `translate(${randX}px, ${randY}px)`;
-            });
-            
-            requestAnimationFrame(animFLelms);
-        }
-        window.addEventListener('load', () => {
-            requestAnimationFrame(animFLelms);
-        });
-        const navIcons = document.querySelectorAll('.nav-icon');
-        navIcons.forEach(icon => {
-            icon.addEventListener('click', function() {
-                navIcons.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-        const dlBtn = document.getElementById('download-button');
-        const dlIcon = document.getElementById('dl-icon');
-        const reqMdl = document.getElementById('req-modal');
-        const mdlClose = document.getElementById('modal-close');
-        const cclDl = document.getElementById('cancel-download');
-        const cnfDl = document.getElementById('confirm-download');
-        function openMdl() {
-            reqMdl.classList.add('active');
-        }
-        function closeMdl() {
-            reqMdl.classList.remove('active');
-        }
-        dlBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!this.classList.contains('disabled')) {
-                openMdl();
+              } else if (match.includes('const')) {
+                return `const ${name} = ${newValue};`;
+              } else if (match.includes('=')) {
+                return `${name} = ${newValue}`;
+              } else if (match.includes(':')) {
+                return `${name}: ${newValue}`;
+              }
+              
+              return match.replace(oldValue, newValue);
             }
+            return match;
+          });
         });
-        dlIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!this.classList.contains('disabled')) {
-                openMdl();
-            }
-        });
-        mdlClose.addEventListener('click', closeMdl);
-        cclDl.addEventListener('click', function(e) {
-            e.preventDefault();
-            closeMdl();
-        });
-        cnfDl.addEventListener('click', async function(e) {
-            e.preventDefault();
-            showAlrt('Download Started', 'Your download is starting now...', 'success');
-            closeMdl();
-            await sleep(1500);
-            window.location.href = 'https://link-hub.net/1353272/landen1337-executor';
-        });
-        window.addEventListener('click', function(e) {
-            if (e.target === reqMdl) {
-                closeMdl();
-            }
-        });
-        function detDev() {
-            const ua = navigator.userAgent.toLowerCase();
-            let devType = "Desktop";
-            if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)) {
-                if (/iphone|ipod/i.test(ua)) {
-                    devType = "iOS";
-                } else if (/ipad/i.test(ua)) {
-                    devType = "iPad";
-                } else if (/android/i.test(ua)) {
-                    devType = "Android";
-                } else {
-                    devType = "Mobile";
-                }
-            } 
-            else if (/macintosh|mac os x/i.test(ua)) {
-                devType = "Mac";
-            } else if (/windows|win32|win64/i.test(ua)) {
-                devType = "Windows";
-            } else if (/linux/i.test(ua)) {
-                devType = "Linux";
-            }
-            
-            return devType;
-        }
-        function updDLelms() {
-            const dlBtn = document.getElementById('download-button');
-            const dlIcon = document.getElementById('dl-icon');
-            const dlMsg = document.getElementById('download-message');
-            const apiBtn = document.getElementById('api-button');
-            const devType = detDev();           
-            const unsupDev = ["Mobile", "iOS", "iPad", "Android", "Mac", "Linux"];           
-            if (unsupDev.includes(devType)) {
-                dlBtn.textContent = `Not Available for ${devType}`;
-                dlBtn.classList.add('disabled');
-                dlBtn.style.pointerEvents = 'none';          
-                apiBtn.textContent = `API Not Available`;
-                apiBtn.classList.add('disabled');
-                apiBtn.style.pointerEvents = 'none';
-                dlIcon.classList.add('disabled');
-                dlMsg.innerHTML = `
-                    <strong>Currently not supported on ${devType}</strong><br>
-                    Join our community to stay updated on future releases and alternative options!
-                `;
-                dlMsg.classList.add('visible');
-            } else {
-                dlBtn.textContent = "Download Landen1337";
-                dlBtn.classList.remove('disabled');
-                dlBtn.style.pointerEvents = 'auto';            
-                apiBtn.textContent = "Download API";
-                apiBtn.classList.remove('disabled');
-                apiBtn.style.pointerEvents = 'auto';
-                dlIcon.classList.remove('disabled');
-                dlMsg.classList.remove('visible');
-            }
-        }
-        window.addEventListener('load', () => {
-            requestAnimationFrame(updDLelms);
-        });
-        let rszTmr;
-        window.addEventListener('resize', () => {
-            clearTimeout(rszTmr);
-            rszTmr = setTimeout(updDLelms, 100);
-        });
-        let scrlTmr;
-        function updNavScrl() {
-            if (scrlTmr) return;
-            scrlTmr = setTimeout(() => {
-                const secs = document.querySelectorAll('section[id]');
-                const scrlPos = window.scrollY;
-                let curSec = '';
-                secs.forEach(sec => {
-                    const secTop = sec.offsetTop - 150;
-                    const secHgt = sec.offsetHeight;
-                    
-                    if (scrlPos >= secTop && scrlPos < secTop + secHgt) {
-                        curSec = sec.getAttribute('id');
-                    }
-                });
-                navIcons.forEach(icon => {
-                    icon.classList.remove('active');
-                    const sec = icon.getAttribute('data-section');
-                    if ((sec === 'home' && (curSec === 'home' || scrlPos < 100)) ||
-                        (sec === 'features' && curSec === 'features') ||
-                        (sec === 'community' && curSec === 'community')) {
-                        icon.classList.add('active');
-                    }
-                });
-                
-                scrlTmr = null;
-            }, 50);
-        }
-        window.addEventListener('scroll', updNavScrl);
-        window.addEventListener('load', updNavScrl);
-        const custAlrt = document.getElementById('custom-alert');
-        const alrtClose = document.getElementById('alert-close');
-        let alrtTmr;
-        alrtClose.addEventListener('click', () => {
-            hideAlrt();
-        });
-        function showAlrt(title, message, type = 'info', duration = 3000) {
-            if (alrtTmr) {
-                clearTimeout(alrtTmr);
-            }
-            document.querySelector('.alert-title').textContent = title;
-            document.querySelector('.alert-message').textContent = message;
-            const alrtIcon = document.querySelector('.alert-icon i');
-            alrtIcon.className = '';
-            custAlrt.classList.remove('alert-success', 'alert-error', 'alert-info', 'alert-warning');
-            switch(type) {
-                case 'success':
-                    alrtIcon.className = 'fas fa-check-circle';
-                    custAlrt.classList.add('alert-success');
-                    break;
-                case 'error':
-                    alrtIcon.className = 'fas fa-exclamation-circle';
-                    custAlrt.classList.add('alert-error');
-                    break;
-                case 'warning':
-                    alrtIcon.className = 'fas fa-exclamation-triangle';
-                    custAlrt.classList.add('alert-warning');
-                    break;
-                default:
-                    alrtIcon.className = 'fas fa-info-circle';
-                    custAlrt.classList.add('alert-info');
-            }
-            custAlrt.classList.add('active');
-            if (duration > 0) {
-                alrtTmr = setTimeout(() => {
-                    hideAlrt();
-                }, duration);
-            }
-        }
-        function hideAlrt() {
-            custAlrt.classList.remove('active');
-        }
-        const apiBtn = document.getElementById('api-button');
-        apiBtn.addEventListener('click', async function(e) {
-            e.preventDefault();
-            if (!this.classList.contains('disabled')) {
-                showAlrt('API Download', 'Landen1337 API download started. Check your downloads folder.', 'success');
-                await sleep(1500);
-                window.location.href = 'https://link-hub.net/1353272/landen1337-executor';
-            } else {
-                const devType = detDev();
-                showAlrt('Not Available', `Landen1337 API is not available for ${devType} devices.`, 'warning');
-            }
-        });
-        window.addEventListener('load', function() {
-            console.log('Landen1337 website loaded!');
-        });
-    </script>
 
+        if (updatedCount === 0) {
+          showStatus('No matching offsets found in the uploaded file. Make sure the file contains offset definitions with names matching the online database.', true);
+          return;
+        }
 
-
-</body></html>
+        const blob = new Blob([updatedText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        
+        downloadLink.href = url;
+        downloadLink.download = `updated_${file.name}`;
+        downloadLink.style.display = 'inline-block';
+        
+        showStatus(`Successfully updated ${updatedCount} offset(s). Click the download link to get your updated file.`);
+        setTimeout(() => {
+          URL.revokeObjectURL(url);
+        }, 60000);
+        
+      } catch (err) {
+        showStatus('Error processing the file: ' + err.message, true);
+        console.error('File processing error:', err);
+      }
+    });
+    landenLoadOffsets();
+  </script>
+</body>
+</html>
