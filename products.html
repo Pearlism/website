@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landen2Rich</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 204, 255, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .top-bar {
+            background: linear-gradient(90deg, #000000, #00ccff, #000000);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 204, 255, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .top-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ccff, transparent);
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+            50% { opacity: 1; transform: scaleX(1.2); }
+        }
+
+        .title {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #00ccff;
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 20px rgba(0, 204, 255, 0.5), 0 0 30px rgba(0, 204, 255, 0.3); }
+            to { text-shadow: 0 0 30px rgba(0, 204, 255, 0.8), 0 0 40px rgba(0, 204, 255, 0.5); }
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 1.2em;
+            margin-top: 10px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 40px 20px;
+        }
+
+        .product-box {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 204, 255, 0.1));
+            border: 2px solid #00ccff;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 204, 255, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: boxFloat 6s ease-in-out infinite, slideInScale 1s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes boxFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        @keyframes slideInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .product-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 204, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .fortnite-image {
+    width: 100%;
+    height: auto;
+    background: url('fortnite.png') center/cover no-repeat;
+    border-radius: 15px;
+    margin: 0 auto 20px;
+    border: 3px solid #00ccff;
+    position: relative;
+    z-index: 2;
+}
+
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite, statusGlow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes statusGlow {
+            from { box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); }
+            to { box-shadow: 0 0 20px rgba(0, 255, 136, 1), 0 0 30px rgba(0, 255, 136, 0.5); }
+        }
+
+        .status-text {
+            font-size: 1.1em;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .product-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00ccff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-description {
+            color: #cccccc;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #00ccff, #0099cc);
+            color: black;
+            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.4);
+            border: 2px solid #00ccff;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 204, 255, 0.6);
+            background: linear-gradient(45deg, #33d6ff, #00ccff);
+        }
+
+        .discord-btn {
+            background: linear-gradient(45deg, #000000, #333333);
+            color: #00ccff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 2px solid #00ccff;
+        }
+
+        .discord-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 204, 255, 0.4);
+            background: linear-gradient(45deg, #1a1a1a, #00ccff);
+        }
+
+        .discord-icon {
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300ccff"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.211.375-.445.865-.608 1.249a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.249a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/></svg>') center/contain no-repeat;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0, 204, 255, 0.6);
+            font-size: 0.9em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: watermarkFade 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes watermarkFade {
+            from { opacity: 0.3; }
+            to { opacity: 0.8; }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <h1 class="title">Landen2Rich </h1>
+            <a href="https://landen419.com" class="btn" style="background: linear-gradient(45deg, #ff9900, #ffcc00); color: black; padding: 10px 20px;">
+                📋 Offsets
+            </a>
+        </div>
+        <p class="subtitle">Last Updated: 6/27/25 </p>
+    </div>
+
+    <div class="main-content">
+        <div class="product-box">
+            <img src="fortnite.png" class="fortnite-image" alt="Fortnite Image">
+            <div class="status">
+                <div class="status-dot"></div>
+                <span class="status-text">Available</span>
+            </div>
+            <div class="product-title">Fortnite External Source</div>
+            <p class="product-description">Latest version | Fixed some Errors</p>
+            
+            <div class="buttons">
+                <a href="https://landen419.com/externalsource.zip" class="btn download-btn">
+                    📂 Download
+                </a>
+                
+
+                
+                <a href="#" class="btn discord-btn" onclick="window.open('https://discord.gg/duWKpxza7V', '_blank')">
+                    <div class="discord-icon"></div>
+                    Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="watermark">made by landen2rich</div>
+</body>
+</html>
