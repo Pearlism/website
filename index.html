@@ -1,557 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Offset Viewer</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #000000;
-      color: #ffffff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .landen-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(0, 123, 255, 0.08) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 80%, rgba(0, 123, 255, 0.06) 0%, transparent 50%),
-                  #000000;
-      z-index: -1;
-    }
-
-    .landen-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .landen-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .landen-title {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #ffffff 0%, #007bff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
-      animation: landen-fade-in 1s ease-out;
-    }
-
-    .landen-subtitle {
-      color: #888;
-      font-size: 1.1rem;
-      animation: landen-fade-in 1s ease-out 0.2s both;
-    }
-
-    .landen-copy-all {
-      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-      position: relative;
-      overflow: hidden;
-      animation: landen-fade-in 1s ease-out 0.4s both;
-      margin: 0.5rem;
-    }
-
-    .landen-copy-all:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
-    }
-
-    .landen-copy-all:active {
-      transform: translateY(0);
-    }
-
-    .landen-copy-all:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .landen-copy-all::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .landen-copy-all:hover::before {
-      left: 100%;
-    }
-
-    .landen-upload-section {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      margin: 2rem 0;
-      text-align: center;
-    }
-
-    .landen-upload-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #ffffff;
-    }
-
-    .landen-file-input {
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px dashed rgba(0, 123, 255, 0.3);
-      border-radius: 12px;
-      padding: 2rem;
-      margin: 1rem 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .landen-file-input:hover {
-      border-color: rgba(0, 123, 255, 0.5);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .landen-file-input input[type="file"] {
-      width: 100%;
-      padding: 0.5rem;
-      background: transparent;
-      border: none;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    .landen-download-link {
-      display: inline-block;
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      padding: 1rem 2rem;
-      font-weight: 600;
-      margin-top: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .landen-download-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
-    }
-
-    .landen-status {
-      margin-top: 1rem;
-      padding: 1rem;
-      border-radius: 8px;
-      font-weight: 500;
-    }
-
-    .landen-status.success {
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      color: #22c55e;
-    }
-
-    .landen-status.error {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #ef4444;
-    }
-
-    .landen-offsets {
-      margin-top: 2rem;
-      display: grid;
-      gap: 1rem;
-      animation: landen-fade-in 1s ease-out 0.6s both;
-    }
-
-    .landen-offset-item {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      animation: landen-slide-up 0.6s ease-out both;
-    }
-
-    .landen-offset-item:nth-child(odd) {
-      animation-delay: calc(var(--index) * 0.1s);
-    }
-
-    .landen-offset-item:nth-child(even) {
-      animation-delay: calc(var(--index) * 0.1s + 0.05s);
-    }
-
-    .landen-offset-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.5), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .landen-offset-item:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(0, 123, 255, 0.3);
-      box-shadow: 0 8px 32px rgba(0, 123, 255, 0.1);
-    }
-
-    .landen-offset-item:hover::before {
-      opacity: 1;
-    }
-
-    .landen-offset-key {
-      font-weight: 600;
-      margin-right: 1.5rem;
-      min-width: 200px;
-      color: #ffffff;
-      font-size: 1.1rem;
-    }
-
-    .landen-offset-value {
-      font-family: 'JetBrains Mono', monospace;
-      color: #007bff;
-      flex: 1;
-      word-break: break-all;
-      font-size: 0.95rem;
-      padding: 0.5rem 1rem;
-      background: rgba(0, 123, 255, 0.1);
-      border-radius: 8px;
-      margin-right: 1rem;
-    }
-
-    .landen-copy-btn {
-      background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 123, 255, 0.1) 100%);
-      color: #007bff;
-      border: 1px solid rgba(0, 123, 255, 0.3);
-      border-radius: 10px;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .landen-copy-btn:hover {
-      background: linear-gradient(135deg, rgba(0, 123, 255, 0.3) 0%, rgba(0, 123, 255, 0.2) 100%);
-      border-color: rgba(0, 123, 255, 0.5);
-      transform: scale(1.05);
-    }
-
-    .landen-copy-btn:active {
-      transform: scale(0.95);
-    }
-
-    .landen-copied {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%) !important;
-      color: #22c55e !important;
-      border-color: rgba(34, 197, 94, 0.3) !important;
-    }
-
-    .landen-loading {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #888;
-      padding: 3rem;
-      animation: landen-pulse 2s infinite;
-    }
-
-    .landen-error {
-      text-align: center;
-      color: #ef4444;
-      padding: 2rem;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 12px;
-      margin-top: 2rem;
-    }
-
-    @keyframes landen-fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes landen-slide-up {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes landen-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    @keyframes landen-copy-success {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .landen-copy-animation {
-      animation: landen-copy-success 0.3s ease-out;
-    }
-
-    @media (max-width: 768px) {
-      .landen-container {
-        padding: 2rem 1rem;
-      }
-      
-      .landen-title {
-        font-size: 2rem;
-      }
-      
-      .landen-offset-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-      
-      .landen-offset-key {
-        min-width: auto;
-        margin-right: 0;
-      }
-      
-      .landen-offset-value {
-        margin-right: 0;
-        width: 100%;
-      }
-    }
-  </style>
+  <title>Landen2Rich</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="landen-background"></div>
-  
-  <div class="landen-container">
-    <div class="landen-header">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-            <h1 class="landen-title">Offset Viewer</h1>
-            <a href="products.html" class="landen-copy-all" style="background: linear-gradient(135deg, #ff9900 0%, #ffcc00 100%);">
-                📦 Products
-            </a>
-        </div>
-        <p class="landen-subtitle">Made by landen <3</p>
-        <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
-    </div>
 
-    <div class="landen-upload-section">
-      <h2 class="landen-upload-title">Update Your Offset File </h2>
-      <div>(must have "#define" infront of the offset, and offset names must much the ones below.)</div>
-      <div class="landen-file-input">
-        <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
-      </div>
-      <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
-      <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
-      <div id="status-message"></div>
-    </div>
-    
-    <div id="landen-offsets" class="landen-offsets">
-      <div class="landen-loading">Loading offsets...</div>
+<body>
+
+  <div class="top-bar">
+    <h2>landen2rich</h2>
+    <a class="discord-link" href="https://discord.gg/landen2rich" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" alt="Discord" />
+      Join Discord
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="product-box">
+      <h1>Temp Spoofer</h1>
+    <p>
+        <strong>Works with BE / EAC</strong><br>
+         <strong>Works with FIVEM</strong><br>
+         <strong>Instant Delivery</strong>
+    </p>
+      <button class="buy-btn" onclick="openModal()">Buy Now</button>
     </div>
   </div>
 
+  <div id="buyModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <iframe src="https://landen2rich.sellhub.cx/product/Temp-Spoofer" allow="payment"></iframe>
+    </div>
+  </div>
+  <div class="design-credit">
+    Designed by <span><strong>landen2rich</strong></span>
+  </div>
   <script>
-    const encodedUrl = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BsYXNtYW9udG9wcHU2YzIvb2Zmc2V0cy9yZWZzL2hlYWRzL21haW4vb2Zmc2V0cy5qc29u';
-    const landenUrl = atob(encodedUrl);
-    const landenOffsetsContainer = document.getElementById('landen-offsets');
-    const landenCopyAllBtn = document.getElementById('landen-copy-all');
-    const statusMessage = document.getElementById('status-message');
-    let currentOffsets = {};
-
-    function showStatus(message, isError = false) {
-      statusMessage.innerHTML = `<div class="landen-status ${isError ? 'error' : 'success'}">${message}</div>`;
-      setTimeout(() => {
-        statusMessage.innerHTML = '';
-      }, 5000);
+    function openModal() {
+      document.getElementById("buyModal").style.display = "block";
     }
-
-    async function landenLoadOffsets() {
-      try {
-        const response = await fetch(landenUrl);
-        if (!response.ok) throw new Error('Failed to fetch offsets');
-        const data = await response.json();
-        currentOffsets = data;
-
-        landenOffsetsContainer.innerHTML = ''; 
-        let allText = '';
-        let index = 0;
-
-        Object.entries(data).forEach(([key, value]) => {
-          allText += `${key}: ${value}\n`;
-
-          const div = document.createElement('div');
-          div.className = 'landen-offset-item';
-          div.style.setProperty('--index', index++);
-
-          const keySpan = document.createElement('span');
-          keySpan.className = 'landen-offset-key';
-          keySpan.textContent = key;
-
-          const valueSpan = document.createElement('span');
-          valueSpan.className = 'landen-offset-value';
-          valueSpan.textContent = value;
-
-          const btn = document.createElement('button');
-          btn.className = 'landen-copy-btn';
-          btn.textContent = 'Copy';
-          btn.onclick = () => landenCopyText(`${key}: ${value}`, btn);
-
-          div.appendChild(keySpan);
-          div.appendChild(valueSpan);
-          div.appendChild(btn);
-          landenOffsetsContainer.appendChild(div);
-        });
-
-        landenCopyAllBtn.disabled = false;
-        landenCopyAllBtn.onclick = () => landenCopyText(allText, landenCopyAllBtn, 'All Copied!', 'Copy All Offsets');
-      } catch (error) {
-        landenOffsetsContainer.innerHTML = `<div class="landen-error">Error loading offsets: ${error.message}</div>`;
+    function closeModal(event) {
+      const modal = document.getElementById("buyModal");
+      const content = document.querySelector(".modal-content");
+      if (event.target === modal && !content.contains(event.target)) {
+        modal.style.display = "none";
       }
     }
-
-    function landenCopyText(text, btn, successText = 'Copied!', originalText = 'Copy') {
-      navigator.clipboard.writeText(text).then(() => {
-        const original = btn.textContent;
-        btn.textContent = successText;
-        btn.classList.add('landen-copied', 'landen-copy-animation');
-        
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.classList.remove('landen-copied', 'landen-copy-animation');
-        }, 1500);
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
-    }
-
-    document.getElementById('update-offsets').addEventListener('click', async () => {
-      const fileInput = document.getElementById('upload-offsets');
-      const downloadLink = document.getElementById('download-updated');
-
-      if (!fileInput.files.length) {
-        showStatus('Please upload an offset file first.', true);
-        return;
-      }
-
-      if (Object.keys(currentOffsets).length === 0) {
-        showStatus('Latest offsets not loaded yet. Please wait...', true);
-        return;
-      }
-
-      try {
-        const file = fileInput.files[0];
-        const text = await file.text();
-        let updatedCount = 0;
-        const patterns = [
-          /#define\s+(\w+)\s+\(?\s*(0x[0-9a-fA-F]+)\s*\)?/gi,
-          /#define\s+(\w+)\s+\(?\s*(\d+)\s*\)?/gi,
-          /const\s+(\w+)\s*=\s*(0x[0-9a-fA-F]+|\\d+);?/gi,
-          /(\w+)\s*[=:]\s*(0x[0-9a-fA-F]+|\\d+)/gi
-        ];
-
-        let updatedText = text;
-        patterns.forEach(pattern => {
-          updatedText = updatedText.replace(pattern, (match, name, oldValue) => {
-            if (currentOffsets.hasOwnProperty(name)) {
-              const newValue = currentOffsets[name];
-              updatedCount++;
-              if (match.includes('#define')) {
-                if (match.includes('(') && match.includes(')')) {
-                  return `#define ${name} (${newValue})`;
-                } else {
-                  return `#define ${name} ${newValue}`;
-                }
-              } else if (match.includes('const')) {
-                return `const ${name} = ${newValue};`;
-              } else if (match.includes('=')) {
-                return `${name} = ${newValue}`;
-              } else if (match.includes(':')) {
-                return `${name}: ${newValue}`;
-              }
-              
-              return match.replace(oldValue, newValue);
-            }
-            return match;
-          });
-        });
-
-        if (updatedCount === 0) {
-          showStatus('No matching offsets found in the uploaded file. Make sure the file contains offset definitions with names matching the online database.', true);
-          return;
-        }
-
-        const blob = new Blob([updatedText], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        
-        downloadLink.href = url;
-        downloadLink.download = `updated_${file.name}`;
-        downloadLink.style.display = 'inline-block';
-        
-        showStatus(`Successfully updated ${updatedCount} offset(s). Click the download link to get your updated file.`);
-        setTimeout(() => {
-          URL.revokeObjectURL(url);
-        }, 60000);
-        
-      } catch (err) {
-        showStatus('Error processing the file: ' + err.message, true);
-        console.error('File processing error:', err);
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.getElementById("buyModal").style.display = "none";
       }
     });
-    landenLoadOffsets();
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+      e.preventDefault();
+      alert("YOU HAVE BEEN BANNED FROM LANDEN2RICH WEBSITE.");
+    }
+  });
   </script>
+
 </body>
 </html>
