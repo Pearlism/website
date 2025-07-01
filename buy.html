@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landen2Rich</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <h2>landen2rich</h2>
+    <a class="discord-link" href="https://discord.gg/landen2rich" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" alt="Discord" />
+      Join Discord
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="product-box">
+      <h1>Temp Spoofer</h1>
+    <p>
+        <strong>Works with BE / EAC</strong><br>
+         <strong>Works with FIVEM</strong><br>
+         <strong>Instant Delivery</strong>
+    </p>
+      <button class="buy-btn" onclick="openModal()">Buy Now</button>
+    </div>
+  </div>
+
+  <div id="buyModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <iframe src="https://landen2rich.sellhub.cx/product/Temp-Spoofer" allow="payment"></iframe>
+    </div>
+  </div>
+  <div class="design-credit">
+    Designed by <span><strong>landen2rich</strong></span>
+  </div>
+  <script>
+    function openModal() {
+      document.getElementById("buyModal").style.display = "block";
+    }
+    function closeModal(event) {
+      const modal = document.getElementById("buyModal");
+      const content = document.querySelector(".modal-content");
+      if (event.target === modal && !content.contains(event.target)) {
+        modal.style.display = "none";
+      }
+    }
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.getElementById("buyModal").style.display = "none";
+      }
+    });
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+      e.preventDefault();
+      alert("YOU HAVE BEEN BANNED FROM LANDEN2RICH WEBSITE.");
+    }
+  });
+  </script>
+
+</body>
+</html>
