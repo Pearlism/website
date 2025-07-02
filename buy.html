@@ -5,64 +5,450 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Landen2Rich</title>
   <link rel="stylesheet" href="styles.css" />
-</head>
+<style>
+  
+  .product-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
 
+  .interactive-image {
+    width: 300px;
+    height: auto;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .interactive-image img {
+    width: 100%;
+    border-radius: 20px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .interactive-image:hover img {
+    transform: rotateY(10deg) rotateX(10deg) scale(1.03);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+  }
+</style>
+</head>
 <body>
 
   <div class="top-bar">
     <h2>landen2rich</h2>
-    <a class="discord-link" href="https://discord.gg/landen2rich" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" alt="Discord" />
-      Join Discord
-    </a>
-  </div>
-
-  <div class="container">
-    <div class="product-box">
-      <h1>Temp Spoofer</h1>
-    <p>
-        <strong>Works with BE / EAC</strong><br>
-         <strong>Works with FIVEM</strong><br>
-         <strong>Instant Delivery</strong>
-    </p>
-      <button class="buy-btn" onclick="openModal()">Buy Now</button>
+    <div style="display: flex; gap: 10px;">
+      <a class="discord-link" href="https://discord.gg/landen2rich" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" alt="Discord" width="20" height="20" />
+        Join Discord
+      </a>
+      <button class="cart-btn" onclick="openCartModal()">🛒 Cart</button>
     </div>
   </div>
+  <div class="spacer"></div>
 
+<style>
+  :root {
+    --pink-neon: #dddddd;
+    --pink-glow: rgba(112, 110, 110, 0.616);
+    --black-bg: #0a0a0a;
+    --shadow-color: rgba(53, 52, 53, 0.4);
+  }
+
+  .marquee-container {
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--pink-neon);
+    border-bottom: 3px solid var(--pink-neon);
+    margin: 3rem auto;
+    height: 200px;
+    max-width: 1000px;
+    background-color: var(--black-bg);
+    box-shadow: 0 0 15px var(--pink-glow);
+    border-radius: 15px;
+  }
+
+  /* Pink fade overlays with subtle glow */
+  .marquee-container::before,
+  .marquee-container::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: 10;
+    filter: drop-shadow(0 0 6px var(--pink-glow));
+  }
+
+  .marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--pink-neon), transparent 80%);
+  }
+
+  .marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--pink-neon), transparent 80%);
+  }
+
+  .marquee-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    animation: scroll-left 40s linear infinite;
+    position: relative;
+    z-index: 1;
+    user-select: none;
+    will-change: transform;
+  }
+
+  /* Smooth hover zoom + glow effect on images */
+  .marquee-content img {
+    height: 160px;
+    margin: 0 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 10px var(--shadow-color));
+    transition: transform 0.4s ease, filter 0.4s ease;
+    cursor: pointer;
+    will-change: transform, filter;
+  }
+
+  .marquee-content img:hover,
+  .marquee-content img:focus {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px var(--pink-neon));
+    outline: none;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50%));
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .marquee-container {
+      height: 140px;
+      max-width: 90vw;
+    }
+    .marquee-content img {
+      height: 110px;
+      margin: 0 20px;
+    }
+    .marquee-container::before,
+    .marquee-container::after {
+      width: 60px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+      animation: none;
+    }
+  }
+</style>
+
+<div class="marquee-container" aria-label="Scrolling logos marquee">
+  <div class="marquee-content" role="list">
+    <img src="https://i.postimg.cc/CxdsKjVn/VALORANT-1.png" alt="Valorant Logo" role="listitem" tabindex="0" />
+    <img src="https://i.imgur.com/cYZFNrL.png" alt="Imgur Image Logo" role="listitem" tabindex="0" />
+    <img src="https://i.postimg.cc/LXfGbDtH/Activision-svg.png" alt="Activision Logo" role="listitem" tabindex="0" />
+    <img src="https://i.postimg.cc/BQ0T2rf3/FT.png" alt="FT Logo" role="listitem" tabindex="0" />
+    <img src="https://www.dropbox.com/scl/fi/ubmhpqvh84e4xhqwaghxd/umhIkje.png?rlkey=qfip9b24fo5u05ukf8odylbt3&raw=1" alt="Dropbox Logo" role="listitem" tabindex="0" />
+
+    <!-- Repeat again for seamless scroll -->
+    <img src="https://i.postimg.cc/CxdsKjVn/VALORANT-1.png" alt="Valorant Logo" role="listitem" tabindex="0" />
+    <img src="https://i.imgur.com/cYZFNrL.png" alt="Imgur Image Logo" role="listitem" tabindex="0" />
+    <img src="https://i.postimg.cc/LXfGbDtH/Activision-svg.png" alt="Activision Logo" role="listitem" tabindex="0" />
+    <img src="https://i.postimg.cc/BQ0T2rf3/FT.png" alt="FT Logo" role="listitem" tabindex="0" />
+    <img src="https://www.dropbox.com/scl/fi/ubmhpqvh84e4xhqwaghxd/umhIkje.png?rlkey=qfip9b24fo5u05ukf8odylbt3&raw=1" alt="Dropbox Logo" role="listitem" tabindex="0" />
+  </div>
+</div>
+</style>
+
+<style>
+  .flex-3d {
+    perspective: 1200px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    min-width: 40%;
+    cursor: none; /* hide native cursor */
+    position: relative;
+  }
+
+  .flex-3d img {
+    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-left: auto;
+    will-change: transform;
+    display: block;
+
+    /* Glow Effect */
+    box-shadow:
+      0 0 20px rgba(255, 255, 255, 0.5),
+      0 0 40px rgba(255, 255, 255, 0.3),
+      0 0 60px rgba(255, 255, 255, 0.2);
+
+    /* Pulse animation */
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.6),
+        0 0 50px rgba(255, 255, 255, 0.4),
+        0 0 70px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  /* Custom cursor element */
+  .custom-cursor {
+    pointer-events: none; /* so it doesn't block mouse events */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at center, #ff00dd 60%, transparent 90%);
+    border: 2px solid #ff00dd;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    mix-blend-mode: difference;
+    z-index: 10;
+    opacity: 0;
+  }
+
+  /* When dragging */
+  .flex-3d.dragging .custom-cursor {
+    background: radial-gradient(circle at center, #ff00dd 80%, transparent 95%);
+    border-color: #ff0077;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+      /* Loading animation for better UX */
+    .loading {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10001;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--primary-gradient);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+</style>
+<div class="product-section">
+  <div class="product-box">
+    <h1>Temp Spoofer</h1>
+    <p>
+      <strong>Works with BE / EAC</strong><br>
+      <strong>Works with FIVEM</strong><br>
+      <strong>Instant Delivery</strong>
+    </p>
+    <button class="buy-btn" onclick="openModal()">Buy Now</button>
+  </div>
+
+ <div class="interactive-image">
+    <img src="temp.png" alt="Temp Spoofer Menu Preview" />
+  </div>
+</div>
   <div id="buyModal" class="modal" onclick="closeModal(event)">
     <div class="modal-content">
       <iframe src="https://landen2rich.sellhub.cx/product/Temp-Spoofer" allow="payment"></iframe>
     </div>
   </div>
+
+  <div id="cartModal" class="modal" onclick="closeCartModal(event)">
+    <div class="modal-content">
+      <iframe src="https://landen2rich.sellhub.cx/payment" allow="payment"></iframe>
+    </div>
+  </div>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
   <div class="design-credit">
     Designed by <span><strong>landen2rich</strong></span>
   </div>
+
   <script>
     function openModal() {
-      document.getElementById("buyModal").style.display = "block";
-    }
-    function closeModal(event) {
-      const modal = document.getElementById("buyModal");
-      const content = document.querySelector(".modal-content");
-      if (event.target === modal && !content.contains(event.target)) {
-        modal.style.display = "none";
-      }
-    }
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    document.getElementById("buyModal").style.display = "block";
+  }, 500); // You can change the delay if needed
+}
+
+function closeModal(event) {
+  const modal = document.getElementById("buyModal");
+  const content = modal.querySelector(".modal-content");
+  if (event.target === modal && !content.contains(event.target)) {
+    modal.style.display = "none";
+  }
+}
+
+
+function openCartModal() {
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    document.getElementById("cartModal").style.display = "block";
+  }, 500);
+}
+
+function closeCartModal(event) {
+  const modal = document.getElementById("cartModal");
+  const content = modal.querySelector(".modal-content");
+  if (event.target === modal && !content.contains(event.target)) {
+    modal.style.display = "none";
+  }
+}
+
+
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
         document.getElementById("buyModal").style.display = "none";
+        document.getElementById("cartModal").style.display = "none";
       }
     });
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
-      e.preventDefault();
-      alert("YOU HAVE BEEN BANNED FROM LANDEN2RICH WEBSITE.");
-    }
-  });
-  </script>
 
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        alert("YOU HAVE BEEN BANNED FROM LANDEN2RICH WEBSITE.");
+      }
+    });
+
+    document.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      showProtectedNotice();
+    });
+
+    document.addEventListener('keydown', e => {
+      const key = e.key.toLowerCase();
+      if (
+        (e.ctrlKey && key === 'u') ||
+        (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) ||
+        e.key === 'f12'
+      ) {
+        e.preventDefault();
+        showProtectedNotice();
+      }
+    });
+
+    function showProtectedNotice() {
+      if (document.getElementById('source-protected')) return;
+
+      const notice = document.createElement('div');
+      notice.id = 'source-protected';
+      notice.innerHTML = `
+        <i class="fa-solid fa-lock lock-icon"></i>
+        <span>Source Protected — Viewing page source is disabled.</span>
+      `;
+      document.body.appendChild(notice);
+
+      requestAnimationFrame(() => notice.classList.add('show'));
+
+      setTimeout(() => {
+        notice.classList.remove('show');
+        setTimeout(() => notice.remove(), 500);
+      }, 2500);
+    }
+    const card = document.querySelector('.interactive-image img');
+
+document.querySelector('.interactive-image').addEventListener('mousemove', (e) => {
+  const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - left;
+  const y = e.clientY - top;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const rotateX = ((y - centerY) / centerY) * -10;
+  const rotateY = ((x - centerX) / centerX) * 10;
+
+  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+});
+
+document.querySelector('.interactive-image').addEventListener('mouseleave', () => {
+  card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+});
+    const container = document.querySelector('.flex-3d');
+  const image = document.getElementById('interactive-3d-image');
+  const cursor = document.getElementById('custom-cursor');
+
+  if (container && image && cursor) {
+    container.addEventListener('mousemove', e => {
+      const { left, top, width, height } = container.getBoundingClientRect();
+      const x = e.clientX - left;
+      const y = e.clientY - top;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+      cursor.style.opacity = '1';
+      const rotateY = ((x - width / 2) / width) * 30;
+      const rotateX = ((height / 2 - y) / height) * 20;
+      image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      image.style.transform = 'none';
+      cursor.style.opacity = '0';
+    });
+  }
+      function showLoading() {
+      document.getElementById('loading').style.display = 'block';
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => notification.classList.add('show'), 100);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
