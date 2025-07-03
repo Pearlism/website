@@ -355,6 +355,60 @@
       .landen-title {
         font-size: 2rem;
       }
+              .design-credit {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(35,35,35,0.95) 100%);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .design-credit:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .design-credit span {
+      background: linear-gradient(45deg, #ffffff, #cccccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+    .cart-btn {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(35,35,35,0.95) 100%);
+  backdrop-filter: blur(10px);
+}
+
+.cart-btn:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+}
       
       .landen-offset-item {
         flex-direction: column;
@@ -376,34 +430,39 @@
 </head>
 <body>
   <div class="landen-background"></div>
-  
+
   <div class="landen-container">
-    <div class="landen-header">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-            <h1 class="landen-title">Offset Viewer</h1>
-            <a href="products.html" class="landen-copy-all" style="background: linear-gradient(135deg, #ff9900 0%, #ffcc00 100%);">
-                📦 Products
-            </a>
-        </div>
-        <p class="landen-subtitle">Made by landen <3</p>
-        <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
+    <div class="landen-header" style="text-align: center;">
+      <h1 class="landen-title">Offset Viewer</h1>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
+        <a href="products.html" class="landen-copy-all" style="background: linear-gradient(135deg, #ff9900 0%, #ffcc00 100%);">
+          📦 Free Products
+        </a>
+        <a href="https://landen419.com/buy" class="landen-copy-all" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);">
+          💳 Buy Temp
+        </a>
+      </div>
     </div>
 
-    <div class="landen-upload-section">
-      <h2 class="landen-upload-title">Update Your Offset File </h2>
-      <div>(must have "#define" infront of the offset, and offset names must much the ones below.)</div>
-      <div class="landen-file-input">
-        <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
-      </div>
-      <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
-      <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
-      <div id="status-message"></div>
-    </div>
-    
-    <div id="landen-offsets" class="landen-offsets">
-      <div class="landen-loading">Loading offsets...</div>
-    </div>
+    <p class="landen-subtitle">Made by landen <3</p>
+    <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
   </div>
+
+  <div class="landen-upload-section">
+    <h2 class="landen-upload-title">Update Your Offset File </h2>
+    <div>(must have "#define" in front of the offset, and offset names must match the ones below.)</div>
+    <div class="landen-file-input">
+      <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
+    </div>
+    <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
+    <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
+    <div id="status-message"></div>
+  </div>
+
+  <div id="landen-offsets" class="landen-offsets">
+    <div class="landen-loading">Loading offsets...</div>
+  </div>
+</div>
 
   <script>
     const encodedUrl = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BsYXNtYW9udG9wcHU2YzIvb2Zmc2V0cy9yZWZzL2hlYWRzL21haW4vb2Zmc2V0cy5qc29u';
