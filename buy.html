@@ -71,7 +71,6 @@
     border-radius: 15px;
   }
 
-  /* Pink fade overlays with subtle glow */
   .marquee-container::before,
   .marquee-container::after {
     content: "";
@@ -268,6 +267,95 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+.vouch-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: transparent;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.vouch-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  background: linear-gradient(45deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.vouch-carousel {
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.vouch-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.vouch-card {
+  flex: 0 0 300px;
+  background: linear-gradient(145deg, rgba(26,26,26,0.9), rgba(35,35,35,0.85));
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  backdrop-filter: blur(18px);
+  color: rgba(255,255,255,0.95);
+  transition: all 0.4s ease;
+}
+
+.vouch-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.vouch-header {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.green-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 6px #4CAF50aa;
+}
+
+.vouch-stars {
+  color: gold;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.vouch-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+}
+
+@media (max-width: 1000px) {
+  .vouch-card {
+    flex: 0 0 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .vouch-card {
+    flex: 0 0 90%;
+  }
+}
+
+
+
 </style>
 <div class="product-section">
   <div class="product-box">
@@ -301,8 +389,62 @@
   <div class="design-credit">
     Designed by <span><strong>landen2rich</strong></span>
   </div>
-
+</div> <!-- end of product-section -->
+<div class="vouch-section">
+  <h2>💬 Customer Vouches</h2>
+  <div class="vouch-carousel">
+    <div class="vouch-track">
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> User123</div>
+        <div class="vouch-stars">⭐⭐⭐⭐⭐</div>
+        <p class="vouch-text">Worked perfectly, got back in Fivem instantly.</p>
+      </div>
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> ClutchPlayer</div>
+        <div class="vouch-stars">⭐⭐⭐⭐</div>
+        <p class="vouch-text">Best temp spoofer out there, cheap and works.</p>
+      </div>
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> JDMNinja</div>
+        <div class="vouch-stars">⭐⭐⭐⭐⭐</div>
+        <p class="vouch-text">Support was fast, and product worked as promised.</p>
+      </div>
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> Component467-playa</div>
+        <div class="vouch-stars">⭐⭐⭐⭐</div>
+        <p class="vouch-text">10/10 would recommend to anyone banned from BE.</p>
+      </div>
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> Clavishwtf</div>
+        <div class="vouch-stars">⭐⭐⭐⭐⭐</div>
+        <p class="vouch-text">Delivery was instant, no issues at all.</p>
+      </div>
+      <div class="vouch-card">
+        <div class="vouch-header"><span class="green-dot"></span> GhostUser</div>
+        <div class="vouch-stars">⭐⭐⭐⭐⭐</div>
+        <p class="vouch-text">Super helpful seller. Highly recommend!</p>
+      </div>
+    </div>
+  </div>
+</div>
   <script>
+           const track = document.querySelector('.vouch-track');
+  const cards = document.querySelectorAll('.vouch-card');
+  const cardWidth = cards[0].offsetWidth + 20;
+  let scrollX = 0;
+
+  function autoSlide() {
+    const visible = Math.floor(document.querySelector('.vouch-carousel').offsetWidth / cardWidth);
+    scrollX += cardWidth;
+
+    if (scrollX > (cards.length - visible) * cardWidth) {
+      scrollX = 0;
+    }
+
+    track.style.transform = `translateX(-${scrollX}px)`;
+  }
+
+  setInterval(autoSlide, 3500);
     function openModal() {
   showLoading();
   setTimeout(() => {
