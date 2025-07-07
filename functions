@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>landen2rich / functions</title>
+  
+  <!-- Font Awesome for Discord icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+      color: #e4e4e7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      animation: float 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); }
+      to { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
+    }
+
+    .discord-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      background: rgba(114, 137, 218, 0.1);
+      border: 1px solid rgba(114, 137, 218, 0.3);
+      border-radius: 25px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .discord-header:hover {
+      background: rgba(114, 137, 218, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(114, 137, 218, 0.3);
+    }
+
+    .discord-header i {
+      font-size: 20px;
+      color: #7289da;
+    }
+
+    /* Main container */
+    .container {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .window {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      animation: slideInUp 0.8s ease-out;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .window.minimized {
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .window.maximized {
+      max-width: 95vw;
+      height: 90vh;
+      border-radius: 10px;
+    }
+
+    .window.closed {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .window-header {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .control-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .control-btn.close { 
+      background: #ff5f57; 
+    }
+    
+    .control-btn.close::after {
+      content: "×";
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .control-btn.minimize { 
+      background: #ffbd2e; 
+    }
+    
+    .control-btn.minimize::after {
+      content: "−";
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .control-btn.maximize { 
+      background: #28ca42; 
+    }
+    
+    .control-btn.maximize::after {
+      content: "□";
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .control-btn:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .control-btn:hover::after {
+      opacity: 1;
+    }
+
+    .tabs-container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-x: auto;
+      transition: all 0.3s ease;
+    }
+
+    .tabs-container.hidden {
+      display: none;
+    }
+
+    .window-content {
+      transition: all 0.3s ease;
+    }
+
+    .window-content.hidden {
+      display: none;
+    }
+
+    /* Desktop-style file icons */
+    .desktop-files {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .desktop-files.active {
+      display: flex;
+    }
+
+    .file-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 20px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .file-icon:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .file-icon i {
+      font-size: 40px;
+      color: #569cd6;
+    }
+
+    .file-icon span {
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .tab {
+      padding: 15px 25px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.03);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      white-space: nowrap;
+      font-weight: 500;
+      color: #a1a1aa;
+    }
+
+    .tab.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #7289da, #ffffff);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .tab.active::after {
+      transform: scaleX(1);
+    }
+
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .code-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .code-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .file-name {
+      font-size: 14px;
+      color: #a1a1aa;
+      font-weight: 500;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .copy-btn.copied {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.5);
+    }
+
+    .code-block {
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+      line-height: 1.8;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .code-block::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .code-block::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .code-block::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    /* VS Code-style syntax highlighting */
+    .keyword { color: #569cd6; font-weight: 500; }
+    .type { color: #4ec9b0; }
+    .function { color: #dcdcaa; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; font-style: italic; }
+    .number { color: #b5cea8; }
+    .operator { color: #d4d4d4; }
+    .variable { color: #9cdcfe; }
+    .constant { color: #d19a66; }
+
+    /* Line numbers */
+    .line-numbers {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 25px 15px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #6a6a6a;
+      font-size: 12px;
+      line-height: 1.8;
+      user-select: none;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .code-text {
+      margin-left: 60px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .header {
+        padding: 15px 20px;
+      }
+      
+      .logo {
+        font-size: 24px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+      
+      .discord-header span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo">landen2rich</div>
+    <a class="discord-header" href="https://discord.gg/landen2rich" target="_blank">
+      <i class="fab fa-discord"></i>
+      <span>Join Discord</span>
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="window">
+      <div class="window-header">
+        <div class="window-controls">
+          <div class="control-btn close" onclick="closeWindow()"></div>
+          <div class="control-btn minimize" onclick="minimizeWindow()"></div>
+          <div class="control-btn maximize" onclick="maximizeWindow()"></div>
+        </div>
+      </div>
+
+      <div class="window-content" id="windowContent">
+        <div class="tabs-container" id="tabsContainer">
+          <div class="tab active" onclick="switchTab(0)">memory_aim.hxx</div>
+          <div class="tab" onclick="switchTab(1)">watermark.hxx</div>
+        </div>
+
+        <div class="code-content active" id="code0">
+          <div class="code-header">
+            <span class="file-name">memory_aim.hxx</span>
+            <button class="copy-btn" onclick="copyCode(0)">
+              <i class="fas fa-copy"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+          <div class="code-block">
+            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</div>
+            <div class="code-text">
+<span class="keyword">void</span> <span class="function">memory_aim</span>(<span class="type">NetConnection</span>* <span class="variable">net</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!<span class="variable">net</span>) <span class="keyword">return</span>;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Target memory location</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">uintptr_t</span> <span class="variable">target</span> = <span class="constant">0xDEADBEEF</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">auto</span> <span class="variable">value</span> = *(<span class="type">float</span>*)(<span class="variable">target</span>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">value</span> <span class="operator">></span> <span class="number">0.0f</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">net</span><span class="operator">-></span><span class="function">SendAimData</span>(<span class="variable">value</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="code-content" id="code1">
+          <div class="code-header">
+            <span class="file-name">watermark.hxx</span>
+            <button class="copy-btn" onclick="copyCode(1)">
+              <i class="fas fa-copy"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+          <div class="code-block">
+            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7</div>
+            <div class="code-text">
+<span class="keyword">void</span> <span class="function">watermark</span>() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> <span class="type">char</span>* <span class="variable">msg</span> = <span class="string">"Protected by Landen's Security"</span>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">x</span> = <span class="number">10</span>, <span class="variable">y</span> = <span class="number">10</span>;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">DrawText</span>(<span class="variable">x</span>, <span class="variable">y</span>, <span class="variable">msg</span>, <span class="constant">WHITE</span>);<br>
+}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desktop-files" id="desktopFiles">
+        <div class="file-icon" onclick="openFile('memory_aim.cpp')">
+          <i class="fas fa-file-code"></i>
+          <span>memory_aim.hxx</span>
+        </div>
+        <div class="file-icon" onclick="openFile('watermark.cpp')">
+          <i class="fas fa-file-code"></i>
+          <span>watermark.hxx</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const codeTexts = [
+      `void memory_aim(NetConnection* net) {
+    if (!net) return;
+
+    // Target memory location
+    uintptr_t target = 0xDEADBEEF;
+    auto value = *(float*)(target);
+
+    if (value > 0.0f) {
+        net->SendAimData(value);
+    }
+}`,
+      `void watermark() {
+    const char* msg = "Protected by Landen's Security";
+    int x = 10, y = 10;
+
+    DrawText(x, y, msg, WHITE);
+}`
+    ];
+
+    let windowState = 'normal'; // normal, minimized, maximized, closed
+    let isDesktopMode = false;
+
+    function closeWindow() {
+      const window = document.querySelector('.window');
+      const windowContent = document.getElementById('windowContent');
+      const desktopFiles = document.getElementById('desktopFiles');
+      
+      windowState = 'closed';
+      window.classList.add('closed');
+      
+      setTimeout(() => {
+        windowContent.classList.add('hidden');
+        desktopFiles.classList.add('active');
+        isDesktopMode = true;
+        window.classList.remove('closed');
+      }, 300);
+    }
+
+    function minimizeWindow() {
+      const window = document.querySelector('.window');
+      
+      if (windowState === 'minimized') {
+        window.classList.remove('minimized');
+        windowState = 'normal';
+      } else {
+        window.classList.add('minimized');
+        window.classList.remove('maximized');
+        windowState = 'minimized';
+      }
+    }
+
+    function maximizeWindow() {
+      const window = document.querySelector('.window');
+      
+      if (windowState === 'maximized') {
+        window.classList.remove('maximized');
+        windowState = 'normal';
+      } else {
+        window.classList.add('maximized');
+        window.classList.remove('minimized');
+        windowState = 'maximized';
+      }
+    }
+
+    function openFile(filename) {
+      if (!isDesktopMode) return;
+      
+      const window = document.querySelector('.window');
+      const windowContent = document.getElementById('windowContent');
+      const desktopFiles = document.getElementById('desktopFiles');
+      
+      // Find which tab to open
+      const fileIndex = filename === 'memory_aim.cpp' ? 0 : 1;
+      
+      // Hide desktop files and show window content
+      desktopFiles.classList.remove('active');
+      windowContent.classList.remove('hidden');
+      isDesktopMode = false;
+      windowState = 'normal';
+      
+      // Switch to the correct tab
+      setTimeout(() => {
+        switchTab(fileIndex);
+      }, 100);
+    }
+
+    function switchTab(index) {
+      const tabs = document.querySelectorAll('.tab');
+      const codeBlocks = document.querySelectorAll('.code-content');
+
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+      });
+
+      codeBlocks.forEach((block, i) => {
+        block.classList.toggle('active', i === index);
+      });
+    }
+
+    function copyCode(index) {
+      const text = codeTexts[index];
+      const button = document.querySelectorAll('.copy-btn')[index];
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+
+    // Add some interactive effects
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate elements on load
+      const elements = document.querySelectorAll('.window, .tab, .copy-btn');
+      elements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
+</body>
+</html>
