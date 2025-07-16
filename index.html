@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,6 +61,15 @@
       color: #888;
       font-size: 1.1rem;
       animation: landen-fade-in 1s ease-out 0.2s both;
+      margin-bottom: 2rem;
+    }
+
+    .landen-nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
 
     .landen-copy-all {
@@ -79,7 +86,8 @@
       position: relative;
       overflow: hidden;
       animation: landen-fade-in 1s ease-out 0.4s both;
-      margin: 0.5rem;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .landen-copy-all:hover {
@@ -112,6 +120,14 @@
       left: 100%;
     }
 
+    .landen-nav-btn-orange {
+      background: linear-gradient(135deg, #ff9900 0%, #ffcc00 100%);
+    }
+
+    .landen-nav-btn-blue {
+      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    }
+
     .landen-upload-section {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
@@ -127,6 +143,12 @@
       font-weight: 600;
       margin-bottom: 1rem;
       color: #ffffff;
+    }
+
+    .landen-upload-description {
+      color: #888;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
     }
 
     .landen-file-input {
@@ -310,6 +332,38 @@
       margin-top: 2rem;
     }
 
+    .design-credit {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(35,35,35,0.95) 100%);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .design-credit:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .design-credit span {
+      background: linear-gradient(45deg, #ffffff, #cccccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
     @keyframes landen-fade-in {
       from {
         opacity: 0;
@@ -355,60 +409,11 @@
       .landen-title {
         font-size: 2rem;
       }
-              .design-credit {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(35,35,35,0.95) 100%);
-      backdrop-filter: blur(10px);
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      font-size: 0.85rem;
-      letter-spacing: 0.8px;
-      font-weight: 500;
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .design-credit:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.9);
-    }
-
-    .design-credit span {
-      background: linear-gradient(45deg, #ffffff, #cccccc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 600;
-    }
-    .cart-btn {
-  text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: transparent;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(35,35,35,0.95) 100%);
-  backdrop-filter: blur(10px);
-}
-
-.cart-btn:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255,255,255,0.1);
-}
+      
+      .landen-nav-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
       
       .landen-offset-item {
         flex-direction: column;
@@ -432,37 +437,41 @@
   <div class="landen-background"></div>
 
   <div class="landen-container">
-    <div class="landen-header" style="text-align: center;">
+    <div class="landen-header">
       <h1 class="landen-title">Offset Viewer</h1>
-      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
-        <a href="products.html" class="landen-copy-all" style="background: linear-gradient(135deg, #ff9900 0%, #ffcc00 100%);">
+      <p class="landen-subtitle">Made by landen <3</p>
+      
+      <div class="landen-nav-buttons">
+        <button id="products-btn" class="landen-copy-all landen-nav-btn-orange">
           📦 Free Products
-        </a>
-        <a href="https://landen419.com/buy" class="landen-copy-all" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);">
+        </button>
+        <button id="buy-temp-btn" class="landen-copy-all landen-nav-btn-blue">
           💳 Buy Temp
-        </a>
+        </button>
       </div>
+      
+      <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
     </div>
 
-    <p class="landen-subtitle">Made by landen <3</p>
-    <button id="landen-copy-all" class="landen-copy-all" disabled>Copy All Offsets</button>
-  </div>
-
-  <div class="landen-upload-section">
-    <h2 class="landen-upload-title">Update Your Offset File </h2>
-    <div>(must have "#define" in front of the offset, and offset names must match the ones below.)</div>
-    <div class="landen-file-input">
-      <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
+    <div class="landen-upload-section">
+      <h2 class="landen-upload-title">Update Your Offset File</h2>
+      <div class="landen-upload-description">(must have "#define" in front of the offset, and offset names must match the ones below.)</div>
+      <div class="landen-file-input">
+        <input type="file" id="upload-offsets" accept=".h,.txt,.hpp,.c,.cpp" />
+      </div>
+      <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
+      <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
+      <div id="status-message"></div>
     </div>
-    <button id="update-offsets" class="landen-copy-all">Update Offsets</button>
-    <a id="download-updated" class="landen-download-link" style="display:none;" download="updated_offsets.h">Download Updated File</a>
-    <div id="status-message"></div>
+
+    <div id="landen-offsets" class="landen-offsets">
+      <div class="landen-loading">Loading offsets...</div>
+    </div>
   </div>
 
-  <div id="landen-offsets" class="landen-offsets">
-    <div class="landen-loading">Loading offsets...</div>
+  <div class="design-credit">
+    Design by <span>landen</span>
   </div>
-</div>
 
   <script>
     const encodedUrl = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BsYXNtYW9udG9wcHU2YzIvb2Zmc2V0cy9yZWZzL2hlYWRzL21haW4vb2Zmc2V0cy5qc29u';
@@ -470,7 +479,17 @@
     const landenOffsetsContainer = document.getElementById('landen-offsets');
     const landenCopyAllBtn = document.getElementById('landen-copy-all');
     const statusMessage = document.getElementById('status-message');
+    const productsBtn = document.getElementById('products-btn');
+    const buyTempBtn = document.getElementById('buy-temp-btn');
     let currentOffsets = {};
+
+    productsBtn.addEventListener('click', () => {
+      window.open('products.html', '_blank');
+    });
+
+    buyTempBtn.addEventListener('click', () => {
+      window.open('https://landen419.com/buy', '_blank');
+    });
 
     function showStatus(message, isError = false) {
       statusMessage.innerHTML = `<div class="landen-status ${isError ? 'error' : 'success'}">${message}</div>`;
@@ -559,8 +578,8 @@
         const patterns = [
           /#define\s+(\w+)\s+\(?\s*(0x[0-9a-fA-F]+)\s*\)?/gi,
           /#define\s+(\w+)\s+\(?\s*(\d+)\s*\)?/gi,
-          /const\s+(\w+)\s*=\s*(0x[0-9a-fA-F]+|\\d+);?/gi,
-          /(\w+)\s*[=:]\s*(0x[0-9a-fA-F]+|\\d+)/gi
+          /const\s+(\w+)\s*=\s*(0x[0-9a-fA-F]+|\d+);?/gi,
+          /(\w+)\s*[=:]\s*(0x[0-9a-fA-F]+|\d+)/gi
         ];
 
         let updatedText = text;
@@ -611,6 +630,7 @@
         console.error('File processing error:', err);
       }
     });
+
     landenLoadOffsets();
   </script>
 </body>
